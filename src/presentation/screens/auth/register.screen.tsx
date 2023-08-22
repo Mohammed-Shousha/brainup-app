@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { Link } from "expo-router";
 
-import { RegisterUserUseCase } from "../../../domain/useCases/register.usecase";
 import { UserRepository } from "../../../data/repositories/user.repository.impl";
+import { RegisterUserUseCase } from "../../../domain/usecases/register.usecase";
 
 import { formStyles } from "../../styles/form.styles";
 
@@ -23,8 +23,8 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
 
-  const handleSubmit = () => {
-    register.execute({
+  const handleSubmit = async () => {
+    await register.execute({
       username,
       name,
       email,

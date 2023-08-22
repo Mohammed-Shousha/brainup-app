@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { Link } from "expo-router";
 
-import { LoginUserUseCase } from "../../../domain/useCases/login.usecase";
 import { UserRepository } from "../../../data/repositories/user.repository.impl";
+import { LoginUserUseCase } from "../../../domain/usecases/login.usecase";
 
 import { formStyles } from "../../styles/form.styles";
 
@@ -20,8 +20,8 @@ const LoginScreen: React.FC<LoginScreenProps> = ({
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {
-    login.execute(username, password);
+  const handleSubmit = async () => {
+    await login.execute(username, password);
   };
 
   return (
