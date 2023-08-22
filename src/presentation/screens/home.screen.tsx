@@ -14,6 +14,12 @@ const HomeScreen = () => {
       <Link href="/register" asChild>
         <Button title="Register" />
       </Link>
+      <Link href="/confirm" asChild>
+        <Button title="Confirm" />
+      </Link>
+      <Link href="/reset-password" asChild>
+        <Button title="Reset Password" />
+      </Link>
       <StatusBar style="auto" />
     </>
   );
