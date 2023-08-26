@@ -1,4 +1,4 @@
-import IUserRepository from "../repositories/user.repository";
+import IUserRepository from "@/domain/repositories/user.repository";
 
 export class ConfirmEmailUseCase {
   constructor(private userRepository: IUserRepository) {}

@@ -1,16 +1,11 @@
-import { View } from "react-native";
-import { Slot, Stack } from "expo-router";
-import Heading from "../../../presentation/components/heading.component";
-import globalStyles from "../../../presentation/styles/global.styles";
+import { Stack } from "expo-router";
 
-const ResetPasswordLayout = () => {
-  return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    />
-  );
-};
+const ResetPasswordLayout = () => (
+  <Stack
+    screenOptions={{
+      headerShown: false,
+    }}
+  />
+);
 
 export default ResetPasswordLayout;

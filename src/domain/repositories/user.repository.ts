@@ -1,4 +1,4 @@
-import User from "../entities/user.entity";
+import User from "@/domain/entities/user.entity";
 
 export default interface IUserRepository {
   register(user: User): Promise<User>;

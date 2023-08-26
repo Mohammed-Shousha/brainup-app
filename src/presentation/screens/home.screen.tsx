@@ -2,10 +2,10 @@ import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Link } from "expo-router";
 
-import Heading from "../components/heading.component";
-import Button from "../components/button.component";
+import Heading from "@/presentation/components/heading.component";
+import Button from "@/presentation/components/button.component";
 
-import globalStyles from "../styles/global.styles";
+import globalStyles from "@/presentation/styles/global.styles";
 
 const HomeScreen = () => {
   return (

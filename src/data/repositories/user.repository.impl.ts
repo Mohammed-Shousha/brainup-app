@@ -1,7 +1,7 @@
-import User from "../../domain/entities/user.entity";
-import IUserRepository from "../../domain/repositories/user.repository";
+import User from "@/domain/entities/user.entity";
+import IUserRepository from "@/domain/repositories/user.repository";
 
-import { sendRequest } from "../../core/utils/helpers";
+import { sendRequest } from "@/core/utils/helpers";
 
 import {
   SEND_CONFIRM_EMAIL_URL,
@@ -11,7 +11,7 @@ import {
   VERIFY_CONFIRM_EMAIL_URL,
   VERIFY_RESET_PASSWORD_URL,
   RESET_PASSWORD_URL,
-} from "../../core/utils/constants";
+} from "@/core/utils/constants";
 
 export class UserRepository implements IUserRepository {
   constructor() {}

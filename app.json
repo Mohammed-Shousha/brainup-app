@@ -25,6 +25,9 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": ["expo-router"],
-    "scheme": "brain-up"
+    "scheme": "brain-up",
+    "experiments": {
+      "tsconfigPaths": true
+    }
   }
 }

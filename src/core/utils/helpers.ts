@@ -1,4 +1,4 @@
-import { ReqMethod } from "../enums/req-method.enum";
+import { ReqMethod } from "@/core/enums/req-method.enum";
 
 type RequestBody = {
   [key: string]: string | number;

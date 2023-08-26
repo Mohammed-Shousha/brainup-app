@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 
-import { UserRepository } from "../../../../data/repositories/user.repository.impl";
-import { ResetPasswordUseCase } from "../../../../domain/usecases/reset-password.usecase";
+import { UserRepository } from "@/data/repositories/user.repository.impl";
+import { ResetPasswordUseCase } from "@/domain/usecases/reset-password.usecase";
 
-import Heading from "../../../components/heading.component";
-import Input from "../../../components/input.component";
-import Button from "../../../components/button.component";
+import Heading from "@/presentation/components/heading.component";
+import Input from "@/presentation/components/input.component";
+import Button from "@/presentation/components/button.component";
 
-import globalStyles from "../../../styles/global.styles";
+import globalStyles from "@/presentation/styles/global.styles";
 
 type ResetPasswordScreenProps = {
   resetPassword: ResetPasswordUseCase;

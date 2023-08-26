@@ -1,5 +1,5 @@
-import User from "../entities/user.entity";
-import IUserRepository from "../repositories/user.repository";
+import User from "@/domain/entities/user.entity";
+import IUserRepository from "@/domain/repositories/user.repository";
 
 export class RegisterUserUseCase {
   constructor(private userRepository: IUserRepository) {}

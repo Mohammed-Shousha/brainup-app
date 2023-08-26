@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { Link } from "expo-router";
 
-import { UserRepository } from "../../../data/repositories/user.repository.impl";
-import { LoginUserUseCase } from "../../../domain/usecases/login.usecase";
+import { UserRepository } from "@/data/repositories/user.repository.impl";
+import { LoginUserUseCase } from "@/domain/usecases/login.usecase";
 
-import Button from "../../components/button.component";
-import Input from "../../components/input.component";
-import Heading from "../../components/heading.component";
-import StyledText from "../../components/text.component";
+import Button from "@/presentation/components/button.component";
+import Input from "@/presentation/components/input.component";
+import Heading from "@/presentation/components/heading.component";
+import StyledText from "@/presentation/components/text.component";
 
-import globalStyles from "../../styles/global.styles";
+import globalStyles from "@/presentation/styles/global.styles";
 
 type LoginScreenProps = {
   login: LoginUserUseCase;
