@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { View } from "react-native";
+
+import Heading from "../../components/heading.component";
+import StyledText from "../../components/text.component";
+import Input from "../../components/input.component";
+import Button from "../../components/button.component";
 
 import { UserRepository } from "../../../data/repositories/user.repository.impl";
 import { ConfirmEmailUseCase } from "../../../domain/usecases/confirm-email.usecase";
 
-import { formStyles } from "../../styles/form.styles";
+import globalStyles from "../../styles/global.styles";
 
 type ConfirmScreenProps = {
   confirmEmail: ConfirmEmailUseCase;
@@ -28,24 +33,26 @@ const ConfirmScreen: React.FC<ConfirmScreenProps> = ({
   };
 
   return (
-    <View style={formStyles.container}>
-      <Text style={formStyles.text}>Confirm Email</Text>
-
-      <TextInput
-        style={formStyles.input}
-        placeholder="Email"
+    <View style={globalStyles.container}>
+      <Heading bold>Confirm Your Email</Heading>
+      <StyledText paragraph>Enter the code sent to you email</StyledText>
+      {/* 
+      <Input
+        label="Email"
+        placeholder="Enter your email"
         onChangeText={setEmail}
         value={email}
+        keyboardType="email-address"
       />
-      <Button title={"Send Email"} onPress={handleSendEmail} />
+      <Button title="Send Email" onPress={handleSendEmail} marginTop /> */}
 
-      <TextInput
-        style={formStyles.input}
-        placeholder="Code"
+      <Input
+        label="Code"
+        placeholder="Enter the 6-digit code"
         onChangeText={setCode}
         value={code}
       />
-      <Button title={"Verify Code"} onPress={handleVerifyCode} />
+      <Button title="Continue" onPress={handleVerifyCode} marginTop />
     </View>
   );
 };

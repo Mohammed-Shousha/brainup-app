@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { View } from "react-native";
 import { Link } from "expo-router";
 
 import { UserRepository } from "../../../data/repositories/user.repository.impl";
 import { RegisterUserUseCase } from "../../../domain/usecases/register.usecase";
 
-import { formStyles } from "../../styles/form.styles";
+import Heading from "../../components/heading.component";
+import Input from "../../components/input.component";
+import Button from "../../components/button.component";
+import StyledText from "../../components/text.component";
+
+import globalStyles from "../../styles/global.styles";
 
 type RegisterScreenProps = {
   register: RegisterUserUseCase;
@@ -34,45 +39,55 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({
   };
 
   return (
-    <View style={formStyles.container}>
-      <Text style={formStyles.text}>Register</Text>
-      <TextInput
-        style={formStyles.input}
+    <View style={globalStyles.container}>
+      <Heading>Register</Heading>
+
+      <Input
+        label="Username"
         placeholder="Username"
         onChangeText={setUsername}
         value={username}
       />
-      <TextInput
-        style={formStyles.input}
+
+      <Input
+        label="Name"
         placeholder="Name"
         onChangeText={setName}
         value={name}
       />
-      <TextInput
-        style={formStyles.input}
+
+      <Input
+        label="Email"
         placeholder="Email"
         onChangeText={setEmail}
         value={email}
         keyboardType="email-address"
       />
-      <TextInput
-        style={formStyles.input}
+
+      <Input
+        label="Password"
         placeholder="Password"
         onChangeText={setPassword}
         value={password}
         secureTextEntry
       />
-      <TextInput
-        style={formStyles.input}
+
+      <Input
+        label="Phone"
         placeholder="Phone"
         onChangeText={setPhone}
         value={phone}
         keyboardType="phone-pad"
       />
+
       <Button title="Register" onPress={handleSubmit} />
-      <Link style={formStyles.link} href="/login">
-        Login
-      </Link>
+
+      <StyledText color={"gray"} center>
+        Already have an account ?
+        <StyledText color={"lightPrimary"}>
+          <Link href="/login"> Sign in</Link>
+        </StyledText>
+      </StyledText>
     </View>
   );
 };
