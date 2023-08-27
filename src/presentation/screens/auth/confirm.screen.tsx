@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 
-import { UserRepository } from "@/data/repositories/user.repository.impl";
-import { ConfirmEmailUseCase } from "@/domain/usecases/confirm-email.usecase";
+import { useUserUseCases } from "@/context/user.context";
 
 import Heading from "@/presentation/components/heading.component";
 import StyledText from "@/presentation/components/text.component";
@@ -11,16 +10,8 @@ import Button from "@/presentation/components/button.component";
 
 import globalStyles from "@/presentation/styles/global.styles";
 
-type ConfirmScreenProps = {
-  confirmEmail: ConfirmEmailUseCase;
-};
-
-const userRepository = new UserRepository();
-const confirmEmailUseCase = new ConfirmEmailUseCase(userRepository);
-
-const ConfirmScreen: React.FC<ConfirmScreenProps> = ({
-  confirmEmail = confirmEmailUseCase,
-}) => {
+const ConfirmScreen: React.FC = () => {
+  const { confirmEmail } = useUserUseCases();
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
 

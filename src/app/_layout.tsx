@@ -6,6 +6,8 @@ import { Nunito_600SemiBold, Nunito_700Bold } from "@expo-google-fonts/nunito";
 
 import { Inter_500Medium } from "@expo-google-fonts/inter";
 
+import { UserProvider } from "@/context/user.context";
+
 SplashScreen.preventAutoHideAsync();
 
 const HomeLayout = () => {
@@ -26,11 +28,13 @@ const HomeLayout = () => {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    />
+    <UserProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
+    </UserProvider>
   );
 };
 

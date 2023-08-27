@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
-import { UserRepository } from "@/data/repositories/user.repository.impl";
-import { RegisterUserUseCase } from "@/domain/usecases/register.usecase";
+import { useUserUseCases } from "@/context/user.context";
 
 import Heading from "@/presentation/components/heading.component";
 import Input from "@/presentation/components/input.component";
@@ -11,17 +10,11 @@ import Button from "@/presentation/components/button.component";
 import StyledText from "@/presentation/components/text.component";
 
 import globalStyles from "@/presentation/styles/global.styles";
+import { ScrollView } from "react-native-gesture-handler";
 
-type RegisterScreenProps = {
-  register: RegisterUserUseCase;
-};
+const RegisterScreen: React.FC = () => {
+  const { register } = useUserUseCases();
 
-const userRepository = new UserRepository();
-const registerUserUseCase = new RegisterUserUseCase(userRepository);
-
-const RegisterScreen: React.FC<RegisterScreenProps> = ({
-  register = registerUserUseCase,
-}) => {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -36,59 +29,62 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({
       password,
       phone,
     });
+    router.replace("/confirm");
   };
 
   return (
-    <View style={globalStyles.container}>
-      <Heading>Register</Heading>
+    <ScrollView>
+      <View style={globalStyles.container}>
+        <Heading>Register</Heading>
 
-      <Input
-        label="Username"
-        placeholder="Username"
-        onChangeText={setUsername}
-        value={username}
-      />
+        <Input
+          label="Username"
+          placeholder="Username"
+          onChangeText={setUsername}
+          value={username}
+        />
 
-      <Input
-        label="Name"
-        placeholder="Name"
-        onChangeText={setName}
-        value={name}
-      />
+        <Input
+          label="Name"
+          placeholder="Name"
+          onChangeText={setName}
+          value={name}
+        />
 
-      <Input
-        label="Email"
-        placeholder="Email"
-        onChangeText={setEmail}
-        value={email}
-        keyboardType="email-address"
-      />
+        <Input
+          label="Email"
+          placeholder="Email"
+          onChangeText={setEmail}
+          value={email}
+          keyboardType="email-address"
+        />
 
-      <Input
-        label="Password"
-        placeholder="Password"
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry
-      />
+        <Input
+          label="Password"
+          placeholder="Password"
+          onChangeText={setPassword}
+          value={password}
+          secureTextEntry
+        />
 
-      <Input
-        label="Phone"
-        placeholder="Phone"
-        onChangeText={setPhone}
-        value={phone}
-        keyboardType="phone-pad"
-      />
+        <Input
+          label="Phone"
+          placeholder="Phone"
+          onChangeText={setPhone}
+          value={phone}
+          keyboardType="phone-pad"
+        />
 
-      <Button title="Register" onPress={handleSubmit} />
+        <Button title="Register" onPress={handleSubmit} />
 
-      <StyledText color={"gray"} center>
-        Already have an account ?
-        <StyledText color={"lightPrimary"}>
-          <Link href="/login"> Sign in</Link>
+        <StyledText color={"gray"} center>
+          Already have an account ?
+          <StyledText color={"lightPrimary"}>
+            <Link href="/login"> Sign in</Link>
+          </StyledText>
         </StyledText>
-      </StyledText>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 

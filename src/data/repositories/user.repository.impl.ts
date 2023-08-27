@@ -19,7 +19,7 @@ export class UserRepository implements IUserRepository {
   async register(user: User): Promise<User> {
     const { username, name, email, password, phone } = user;
 
-    const data = await sendRequest(REGISTER_URL, "POST", {
+    const registerResult = await sendRequest(REGISTER_URL, "POST", {
       username,
       name,
       email,
@@ -28,60 +28,76 @@ export class UserRepository implements IUserRepository {
       phone_number: phone,
     });
 
-    console.log(data);
+    console.log(registerResult);
 
     return user;
   }
 
   async login(username: string, password: string): Promise<void> {
-    const data = await sendRequest(LOGIN_URL, "POST", {
+    const loginResult = await sendRequest(LOGIN_URL, "POST", {
       user: username,
       password,
     });
 
-    console.log(data);
+    console.log({ loginResult });
   }
 
   async sendConfirmEmail(email: string): Promise<void> {
-    const data = await sendRequest(SEND_CONFIRM_EMAIL_URL, "POST", {
-      email,
-    });
+    const sendConfirmEmailResult = await sendRequest(
+      SEND_CONFIRM_EMAIL_URL,
+      "POST",
+      {
+        email,
+      }
+    );
 
-    console.log(data);
+    console.log({ sendConfirmEmailResult });
   }
 
   async verifyConfirmCode(code: string): Promise<void> {
-    const data = await sendRequest(VERIFY_CONFIRM_EMAIL_URL, "POST", {
-      code,
-    });
+    const verifyConfirmCodeResult = await sendRequest(
+      VERIFY_CONFIRM_EMAIL_URL,
+      "POST",
+      {
+        code,
+      }
+    );
 
-    console.log(data);
+    console.log({ verifyConfirmCodeResult });
   }
 
   async sendResetPasswordEmail(email: string): Promise<void> {
-    const data = await sendRequest(SEND_RESET_PASSWORD_URL, "POST", {
-      email,
-    });
+    const sendResetPasswordEmailResult = await sendRequest(
+      SEND_RESET_PASSWORD_URL,
+      "POST",
+      {
+        email,
+      }
+    );
 
-    console.log(data);
+    console.log({ sendResetPasswordEmailResult });
   }
 
   async verifyResetPasswordCode(code: string): Promise<string> {
-    const data = await sendRequest(VERIFY_RESET_PASSWORD_URL, "POST", {
-      code,
-    });
+    const verifyResetPasswordCodeResult = await sendRequest(
+      VERIFY_RESET_PASSWORD_URL,
+      "POST",
+      {
+        code,
+      }
+    );
 
-    console.log(data);
+    console.log({ verifyResetPasswordCodeResult });
 
-    return data.token;
+    return verifyResetPasswordCodeResult.token;
   }
 
   async resetPassword(token: string, password: string): Promise<void> {
-    const data = await sendRequest(RESET_PASSWORD_URL, "POST", {
+    const resetPasswordResult = await sendRequest(RESET_PASSWORD_URL, "POST", {
       token,
       password,
     });
 
-    console.log(data);
+    console.log({ resetPasswordResult });
   }
 }

@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { Link } from "expo-router";
+import { router } from "expo-router";
 
 import Heading from "@/presentation/components/heading.component";
 import Button from "@/presentation/components/button.component";
@@ -8,25 +8,21 @@ import Button from "@/presentation/components/button.component";
 import globalStyles from "@/presentation/styles/global.styles";
 
 const HomeScreen = () => {
+  const navigate = (route: string) => {
+    router.push(route);
+  };
+
   return (
     <View style={globalStyles.container}>
-      <Heading>Home</Heading>
+      <Heading marginBottom={40}>Home</Heading>
 
-      <Link href="/login" asChild>
-        <Button title="Login" />
-      </Link>
+      <Button title="Login" onPress={() => navigate("/login")} />
 
-      <Link href="/register" asChild>
-        <Button title="Register" />
-      </Link>
+      <Button title="Register" onPress={() => navigate("/register")} />
 
-      <Link href="/confirm" asChild>
-        <Button title="Confirm" />
-      </Link>
+      <Button title="Confirm" onPress={() => navigate("/confirm")} />
 
-      <Link href="/enter-email" asChild>
-        <Button title="Reset Password" />
-      </Link>
+      <Button title="Reset Password" onPress={() => navigate("/enter-email")} />
 
       <StatusBar style="auto" />
     </View>
