@@ -17,7 +17,11 @@ const ResetPasswordScreen: React.FC = () => {
   const [code, setCode] = useState("");
 
   const handleVerifyCode = async () => {
-    const token = await resetPassword.verifyCode(code);
+    const verifyCodeResult = await resetPassword.verifyCode(code);
+
+    console.log({ verifyCodeResult });
+
+    const token = verifyCodeResult.token;
     router.push({ pathname: "/enter-new-password", params: { token } });
   };
 

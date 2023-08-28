@@ -22,13 +22,16 @@ const RegisterScreen: React.FC = () => {
   const [phone, setPhone] = useState("");
 
   const handleSubmit = async () => {
-    await register.execute({
+    const registerResult = await register.execute({
       username,
       name,
       email,
       password,
       phone,
     });
+
+    console.log({ registerResult });
+
     router.replace("/confirm");
   };
 

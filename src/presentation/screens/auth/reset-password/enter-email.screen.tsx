@@ -17,7 +17,10 @@ const EnterEmailScreen: React.FC = () => {
   const [email, setEmail] = useState("");
 
   const handleSendEmail = async () => {
-    await resetPassword.send(email);
+    const sendEmailResult = await resetPassword.send(email);
+
+    console.log({ sendEmailResult });
+
     router.push("/enter-code");
   };
 

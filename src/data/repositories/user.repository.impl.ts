@@ -1,6 +1,8 @@
 import User from "@/domain/entities/user.entity";
 import IUserRepository from "@/domain/repositories/user.repository";
 
+import ApiResponse from "@/core/types/api-response.type";
+
 import { sendRequest } from "@/core/utils/helpers";
 
 import {
@@ -16,10 +18,10 @@ import {
 export class UserRepository implements IUserRepository {
   constructor() {}
 
-  async register(user: User): Promise<User> {
+  async register(user: User): Promise<ApiResponse> {
     const { username, name, email, password, phone } = user;
 
-    const registerResult = await sendRequest(REGISTER_URL, "POST", {
+    const registerResponse = await sendRequest(REGISTER_URL, "POST", {
       username,
       name,
       email,
@@ -28,22 +30,32 @@ export class UserRepository implements IUserRepository {
       phone_number: phone,
     });
 
-    console.log(registerResult);
+    console.log({ registerResponse });
 
-    return user;
+    return {
+      status: registerResponse.status,
+      message: registerResponse.message,
+      token: registerResponse.token,
+    };
   }
 
-  async login(username: string, password: string): Promise<void> {
-    const loginResult = await sendRequest(LOGIN_URL, "POST", {
+  async login(username: string, password: string): Promise<ApiResponse> {
+    const loginResponse = await sendRequest(LOGIN_URL, "POST", {
       user: username,
       password,
     });
 
-    console.log({ loginResult });
+    console.log({ loginResponse });
+
+    return {
+      status: loginResponse.status,
+      message: loginResponse.message,
+      token: loginResponse.token,
+    };
   }
 
-  async sendConfirmEmail(email: string): Promise<void> {
-    const sendConfirmEmailResult = await sendRequest(
+  async sendConfirmEmail(email: string): Promise<ApiResponse> {
+    const sendConfirmEmailResponse = await sendRequest(
       SEND_CONFIRM_EMAIL_URL,
       "POST",
       {
@@ -51,11 +63,16 @@ export class UserRepository implements IUserRepository {
       }
     );
 
-    console.log({ sendConfirmEmailResult });
+    console.log({ sendConfirmEmailResponse });
+
+    return {
+      status: sendConfirmEmailResponse.status,
+      message: sendConfirmEmailResponse.message,
+    };
   }
 
-  async verifyConfirmCode(code: string): Promise<void> {
-    const verifyConfirmCodeResult = await sendRequest(
+  async verifyConfirmCode(code: string): Promise<ApiResponse> {
+    const verifyConfirmCodeResponse = await sendRequest(
       VERIFY_CONFIRM_EMAIL_URL,
       "POST",
       {
@@ -63,11 +80,16 @@ export class UserRepository implements IUserRepository {
       }
     );
 
-    console.log({ verifyConfirmCodeResult });
+    console.log({ verifyConfirmCodeResponse });
+
+    return {
+      status: verifyConfirmCodeResponse.status,
+      message: verifyConfirmCodeResponse.message,
+    };
   }
 
-  async sendResetPasswordEmail(email: string): Promise<void> {
-    const sendResetPasswordEmailResult = await sendRequest(
+  async sendResetPasswordEmail(email: string): Promise<ApiResponse> {
+    const sendResetPasswordEmailResponse = await sendRequest(
       SEND_RESET_PASSWORD_URL,
       "POST",
       {
@@ -75,11 +97,16 @@ export class UserRepository implements IUserRepository {
       }
     );
 
-    console.log({ sendResetPasswordEmailResult });
+    console.log({ sendResetPasswordEmailResponse });
+
+    return {
+      status: sendResetPasswordEmailResponse.status,
+      message: sendResetPasswordEmailResponse.message,
+    };
   }
 
-  async verifyResetPasswordCode(code: string): Promise<string> {
-    const verifyResetPasswordCodeResult = await sendRequest(
+  async verifyResetPasswordCode(code: string): Promise<ApiResponse> {
+    const verifyResetPasswordCodeResponse = await sendRequest(
       VERIFY_RESET_PASSWORD_URL,
       "POST",
       {
@@ -87,17 +114,30 @@ export class UserRepository implements IUserRepository {
       }
     );
 
-    console.log({ verifyResetPasswordCodeResult });
+    console.log({ verifyResetPasswordCodeResponse });
 
-    return verifyResetPasswordCodeResult.token;
+    return {
+      status: verifyResetPasswordCodeResponse.status,
+      message: verifyResetPasswordCodeResponse.message,
+      token: verifyResetPasswordCodeResponse.token,
+    };
   }
 
-  async resetPassword(token: string, password: string): Promise<void> {
-    const resetPasswordResult = await sendRequest(RESET_PASSWORD_URL, "POST", {
-      token,
-      password,
-    });
+  async resetPassword(token: string, password: string): Promise<ApiResponse> {
+    const resetPasswordResponse = await sendRequest(
+      RESET_PASSWORD_URL,
+      "POST",
+      {
+        token,
+        password,
+      }
+    );
 
-    console.log({ resetPasswordResult });
+    console.log({ resetPasswordResponse });
+
+    return {
+      status: resetPasswordResponse.status,
+      message: resetPasswordResponse.message,
+    };
   }
 }

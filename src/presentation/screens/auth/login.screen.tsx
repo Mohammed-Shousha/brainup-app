@@ -17,7 +17,9 @@ const LoginScreen: React.FC = () => {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async () => {
-    await login.execute(email, password);
+    const loginResult = await login.execute(email, password);
+
+    console.log({ loginResult });
   };
 
   return (

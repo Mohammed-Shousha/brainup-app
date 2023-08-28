@@ -16,19 +16,23 @@ const ConfirmScreen: React.FC = () => {
   const [code, setCode] = useState("");
 
   const handleSendEmail = async () => {
-    await confirmEmail.send(email);
+    const sendEmailResult = await confirmEmail.send(email);
+
+    console.log({ sendEmailResult });
   };
 
   const handleVerifyCode = async () => {
-    await confirmEmail.verifyCode(code);
+    const verifyCodeResult = await confirmEmail.verifyCode(code);
+
+    console.log({ verifyCodeResult });
   };
 
   return (
     <View style={globalStyles.container}>
       <Heading bold>Confirm Your Email</Heading>
       <StyledText paragraph>Enter the code sent to you email</StyledText>
-      {/* 
-      <Input
+
+      {/* <Input
         label="Email"
         placeholder="Enter your email"
         onChangeText={setEmail}

@@ -21,7 +21,11 @@ const EnterNewPasswordScreen: React.FC = ({}) => {
   const handleResetPassword = async () => {
     if (token && typeof token === "string") {
       console.log({ token });
-      await resetPassword.reset(token, confirmPassword);
+      const resetPasswordResult = await resetPassword.reset(
+        token,
+        confirmPassword
+      );
+      console.log({ resetPasswordResult });
       router.replace("/login");
     }
   };
