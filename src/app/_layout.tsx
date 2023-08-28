@@ -6,7 +6,7 @@ import { Nunito_600SemiBold, Nunito_700Bold } from "@expo-google-fonts/nunito";
 
 import { Inter_500Medium } from "@expo-google-fonts/inter";
 
-import { UserProvider } from "@/context/user.context";
+import { UserProvider } from "@/presentation/context/user.context";
 
 SplashScreen.preventAutoHideAsync();
 

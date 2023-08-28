@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 
-import { useUserUseCases } from "@/context/user.context";
+import { useUserUseCases } from "@/presentation/context/user.context";
 
 import Heading from "@/presentation/components/heading.component";
 import StyledText from "@/presentation/components/text.component";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View } from "react-native";
 import { Link, router } from "expo-router";
 
-import { useUserUseCases } from "@/context/user.context";
+import { useUserUseCases } from "@/presentation/context/user.context";
 
 import Heading from "@/presentation/components/heading.component";
 import Input from "@/presentation/components/input.component";
