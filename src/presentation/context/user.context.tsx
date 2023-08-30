@@ -1,12 +1,12 @@
 import { createContext, useState, useContext } from "react";
 import User from "@/domain/entities/user.entity";
 
-import { UserRepository } from "@/data/repositories/user.repository.impl";
+import UserRepository from "@/data/repositories/user.repository.impl";
 
-import { LoginUserUseCase } from "@/domain/usecases/login.usecase";
-import { RegisterUserUseCase } from "@/domain/usecases/register.usecase";
-import { ConfirmEmailUseCase } from "@/domain/usecases/confirm-email.usecase";
-import { ResetPasswordUseCase } from "@/domain/usecases/reset-password.usecase";
+import LoginUserUseCase from "@/domain/usecases/auth/login.usecase";
+import RegisterUserUseCase from "@/domain/usecases/auth/register.usecase";
+import ConfirmEmailUseCase from "@/domain/usecases/auth/confirm-email.usecase";
+import ResetPasswordUseCase from "@/domain/usecases/auth/reset-password.usecase";
 
 const userRepository = new UserRepository();
 

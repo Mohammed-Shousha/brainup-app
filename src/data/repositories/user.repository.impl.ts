@@ -15,7 +15,7 @@ import {
   RESET_PASSWORD_URL,
 } from "@/core/utils/constants";
 
-export class UserRepository implements IUserRepository {
+export default class UserRepository implements IUserRepository {
   constructor() {}
 
   async register(user: User): Promise<ApiResponse> {

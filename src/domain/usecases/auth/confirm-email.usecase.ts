@@ -1,6 +1,6 @@
 import IUserRepository from "@/domain/repositories/user.repository";
 
-export class ConfirmEmailUseCase {
+export default class ConfirmEmailUseCase {
   constructor(private userRepository: IUserRepository) {}
 
   async send(email: string) {

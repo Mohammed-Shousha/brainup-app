@@ -1,6 +1,6 @@
 import IUserRepository from "@/domain/repositories/user.repository";
 
-export class ResetPasswordUseCase {
+export default class ResetPasswordUseCase {
   constructor(private userRepository: IUserRepository) {}
 
   async send(email: string) {
