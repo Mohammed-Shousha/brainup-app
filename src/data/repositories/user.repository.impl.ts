@@ -19,14 +19,14 @@ export class UserRepository implements IUserRepository {
   constructor() {}
 
   async register(user: User): Promise<ApiResponse> {
-    const { username, name, email, password, phone } = user;
+    const { username, name, email, password, phone, type } = user;
 
     const registerResponse = await sendRequest(REGISTER_URL, "POST", {
       username,
       name,
       email,
       password,
-      user_type: "student",
+      user_type: type,
       phone_number: phone,
     });
 

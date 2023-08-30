@@ -15,12 +15,13 @@ const registerUserUseCase = new RegisterUserUseCase(userRepository);
 const confirmEmailUseCase = new ConfirmEmailUseCase(userRepository);
 const resetPasswordUseCase = new ResetPasswordUseCase(userRepository);
 
-const userMock = {
+const userMock: User = {
   name: "context user",
   email: "context@email.com",
   password: "123456",
   username: "contextuser",
   phone: "01234567890",
+  type: "student",
 };
 
 type UserContextType = {

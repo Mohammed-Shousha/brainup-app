@@ -11,6 +11,7 @@ import StyledText from "@/presentation/components/text.component";
 
 import globalStyles from "@/presentation/styles/global.styles";
 import { ScrollView } from "react-native-gesture-handler";
+import { UserType } from "@/core/enums/user-type.enum";
 
 const RegisterScreen: React.FC = () => {
   const { register } = useUserUseCases();
@@ -20,6 +21,7 @@ const RegisterScreen: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [type, setType] = useState<UserType>("student");
 
   const handleSubmit = async () => {
     const registerResult = await register.execute({
@@ -28,6 +30,7 @@ const RegisterScreen: React.FC = () => {
       email,
       password,
       phone,
+      type,
     });
 
     console.log({ registerResult });
