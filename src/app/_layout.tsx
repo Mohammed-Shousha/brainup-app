@@ -7,6 +7,9 @@ import { Nunito_600SemiBold, Nunito_700Bold } from "@expo-google-fonts/nunito";
 import { Inter_500Medium } from "@expo-google-fonts/inter";
 
 import { UserProvider } from "@/presentation/context/user.context";
+import { ClassroomProvider } from "@/presentation/context/classroom.context";
+import { QuizProvider } from "@/presentation/context/quiz.context";
+import { LessonProvider } from "@/presentation/context/lesson.context";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -29,11 +32,17 @@ const HomeLayout = () => {
 
   return (
     <UserProvider>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
+      <ClassroomProvider>
+        <QuizProvider>
+          <LessonProvider>
+            <Stack
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
+          </LessonProvider>
+        </QuizProvider>
+      </ClassroomProvider>
     </UserProvider>
   );
 };
