@@ -24,6 +24,10 @@ const HomeScreen = () => {
 
       <Button title="Reset Password" onPress={() => navigate("/enter-email")} />
 
+      <Button title="Teacher Home" onPress={() => navigate("/teacher")} />
+
+      <Button title="Student Home" onPress={() => navigate("/student")} />
+
       <StatusBar style="auto" />
     </View>
   );
