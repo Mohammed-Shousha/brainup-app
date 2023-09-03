@@ -1,4 +1,4 @@
-import { Pressable, Text, StyleSheet } from "react-native";
+import { Pressable, Text, StyleSheet, ActivityIndicator } from "react-native";
 
 import { colors } from "@/presentation/styles/colors.styles";
 import { fonts } from "@/presentation/styles/fonts.styles";
@@ -6,16 +6,30 @@ import { fonts } from "@/presentation/styles/fonts.styles";
 type ButtonProps = {
   title: string;
   onPress?: () => void;
+  isLoading?: boolean;
   marginTop?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ title, onPress, marginTop }) => {
+const Button: React.FC<ButtonProps> = ({
+  title,
+  onPress,
+  isLoading,
+  marginTop,
+}) => {
   return (
     <Pressable
       onPress={onPress}
       style={[styles.button, marginTop && styles.marginTop]}
+      disabled={isLoading}
     >
-      <Text style={styles.buttonText}>{title}</Text>
+      {isLoading && (
+        <ActivityIndicator
+          size="small"
+          color={colors.white}
+          style={{ marginRight: 10 }}
+        />
+      )}
+      <Text style={styles.buttonText}>{isLoading ? "Loading..." : title}</Text>
     </Pressable>
   );
 };
@@ -26,6 +40,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.primary,
     display: "flex",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 16,

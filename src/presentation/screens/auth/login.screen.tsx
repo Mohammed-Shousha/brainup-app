@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 import { useUserUseCases } from "@/presentation/context/user.context";
 
@@ -15,9 +15,22 @@ const LoginScreen: React.FC = () => {
   const { login } = useUserUseCases();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
+    setIsLoading(true);
+
     const loginResult = await login.execute(email, password);
+
+    if (loginResult.status === "failed") {
+      alert(loginResult.message);
+      setIsLoading(false);
+      return;
+    }
+
+    router.replace("/teacher");
+
+    setIsLoading(false);
 
     console.log({ loginResult });
   };
@@ -40,9 +53,9 @@ const LoginScreen: React.FC = () => {
         secureTextEntry
       />
       <StyledText color={"lightPrimary"}>
-        <Link href="/reset-password">Forget your password ?</Link>
+        <Link href="/enter-email">Forget your password ?</Link>
       </StyledText>
-      <Button title="Sign in" onPress={handleSubmit} />
+      <Button title="Sign in" onPress={handleSubmit} isLoading={isLoading} />
       <StyledText color={"gray"} center>
         Don't have an account ?
         <StyledText color={"lightPrimary"}>

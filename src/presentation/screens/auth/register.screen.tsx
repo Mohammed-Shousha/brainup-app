@@ -23,7 +23,11 @@ const RegisterScreen: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [type, setType] = useState<UserType>("student");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async () => {
+    setIsLoading(true);
+
     const registerResult = await register.execute({
       username,
       name,
@@ -33,9 +37,17 @@ const RegisterScreen: React.FC = () => {
       type,
     });
 
-    console.log({ registerResult });
+    if (registerResult.status === "failed") {
+      alert(registerResult.message);
+      setIsLoading(false);
+      return;
+    }
 
     router.replace("/confirm");
+
+    setIsLoading(false);
+
+    console.log({ registerResult });
   };
 
   return (
@@ -81,7 +93,7 @@ const RegisterScreen: React.FC = () => {
           keyboardType="phone-pad"
         />
 
-        <Button title="Register" onPress={handleSubmit} />
+        <Button title="Register" onPress={handleSubmit} isLoading={isLoading} />
 
         <StyledText color={"gray"} center>
           Already have an account ?
