@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import User from "@/domain/entities/user.entity";
 import IUserRepository from "@/domain/repositories/user.repository";
 
@@ -35,7 +37,6 @@ export default class UserRepository implements IUserRepository {
     return {
       status: registerResponse.status,
       message: registerResponse.message,
-      token: registerResponse.token,
     };
   }
 
@@ -50,7 +51,6 @@ export default class UserRepository implements IUserRepository {
     return {
       status: loginResponse.status,
       message: loginResponse.message,
-      token: loginResponse.token,
     };
   }
 
@@ -114,22 +114,30 @@ export default class UserRepository implements IUserRepository {
       }
     );
 
+    if (verifyResetPasswordCodeResponse.status === "success") {
+      await AsyncStorage.setItem(
+        "reset-password-token",
+        verifyResetPasswordCodeResponse.token
+      );
+    }
+
     console.log({ verifyResetPasswordCodeResponse });
 
     return {
       status: verifyResetPasswordCodeResponse.status,
       message: verifyResetPasswordCodeResponse.message,
-      token: verifyResetPasswordCodeResponse.token,
     };
   }
 
-  async resetPassword(token: string, password: string): Promise<ApiResponse> {
+  async resetPassword(newPassword: string): Promise<ApiResponse> {
+    const token = (await AsyncStorage.getItem("reset-password-token")) || "";
+
     const resetPasswordResponse = await sendRequest(
       RESET_PASSWORD_URL,
       "POST",
       {
         token,
-        password,
+        password: newPassword,
       }
     );
 

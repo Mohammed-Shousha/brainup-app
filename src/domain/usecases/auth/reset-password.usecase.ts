@@ -7,11 +7,11 @@ export default class ResetPasswordUseCase {
     return await this.userRepository.sendResetPasswordEmail(email);
   }
 
-  async verifyCode(token: string) {
-    return await this.userRepository.verifyResetPasswordCode(token);
+  async verifyCode(code: string) {
+    return await this.userRepository.verifyResetPasswordCode(code);
   }
 
-  async reset(token: string, password: string) {
-    return await this.userRepository.resetPassword(token, password);
+  async reset(newPassword: string) {
+    return await this.userRepository.resetPassword(newPassword);
   }
 }

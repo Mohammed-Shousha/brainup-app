@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { router, useLocalSearchParams } from "expo-router";
+import { router } from "expo-router";
 
 import { useUserUseCases } from "@/presentation/context/user.context";
 
@@ -13,21 +13,19 @@ import globalStyles from "@/presentation/styles/global.styles";
 const EnterNewPasswordScreen: React.FC = ({}) => {
   const { resetPassword } = useUserUseCases();
 
-  const { token } = useLocalSearchParams();
-
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleResetPassword = async () => {
-    if (token && typeof token === "string") {
-      console.log({ token });
-      const resetPasswordResult = await resetPassword.reset(
-        token,
-        confirmPassword
-      );
-      console.log({ resetPasswordResult });
-      router.replace("/login");
+    const resetPasswordResult = await resetPassword.reset(confirmPassword);
+    console.log({ resetPasswordResult });
+
+    if (resetPasswordResult.status === "failed") {
+      alert(resetPasswordResult.message);
+      return;
     }
+
+    router.replace("/login");
   };
 
   return (

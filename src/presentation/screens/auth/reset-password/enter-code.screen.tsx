@@ -21,8 +21,12 @@ const ResetPasswordScreen: React.FC = () => {
 
     console.log({ verifyCodeResult });
 
-    const token = verifyCodeResult.token;
-    router.push({ pathname: "/enter-new-password", params: { token } });
+    if (verifyCodeResult.status === "failed") {
+      alert(verifyCodeResult.message);
+      return;
+    }
+
+    router.push("/enter-new-password");
   };
 
   return (

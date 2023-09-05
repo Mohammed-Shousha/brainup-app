@@ -8,5 +8,5 @@ export default interface IUserRepository {
   verifyConfirmCode(code: string): Promise<ApiResponse>;
   sendResetPasswordEmail(email: string): Promise<ApiResponse>;
   verifyResetPasswordCode(code: string): Promise<ApiResponse>;
-  resetPassword(token: string, password: string): Promise<ApiResponse>;
+  resetPassword(newPassword: string): Promise<ApiResponse>;
 }
