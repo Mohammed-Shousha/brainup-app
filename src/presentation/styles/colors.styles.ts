@@ -1,4 +1,4 @@
-export const colors = {
+const colors = {
   primary: "#312880",
   lightPrimary: "#5457A6",
   secondary: "#000",
@@ -10,3 +10,5 @@ export const colors = {
   error: "#ff0000",
   success: "#00ff00",
 } as const;
+
+export default colors;

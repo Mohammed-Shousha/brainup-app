@@ -1,7 +1,7 @@
 import { Text, StyleSheet } from "react-native";
 
-import { colors } from "@/presentation/styles/colors.styles";
-import { fonts } from "@/presentation/styles/fonts.styles";
+import colors from "@/presentation/styles/colors.styles";
+import fonts from "@/presentation/styles/fonts.styles";
 
 type TextProps = {
   children: string | React.ReactNode;
