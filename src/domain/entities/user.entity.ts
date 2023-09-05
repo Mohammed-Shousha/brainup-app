@@ -1,4 +1,4 @@
-import { UserType } from "@/core/enums/user-type.enum";
+import UserType from "@/core/enums/user-type.enum";
 
 export default interface User {
   name: string;

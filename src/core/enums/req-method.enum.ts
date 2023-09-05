@@ -5,4 +5,6 @@ const REQ_METHOD = {
   DELETE: "DELETE",
 } as const;
 
-export type ReqMethod = keyof typeof REQ_METHOD;
+type ReqMethod = keyof typeof REQ_METHOD;
+
+export default ReqMethod;

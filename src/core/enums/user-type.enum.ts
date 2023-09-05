@@ -3,4 +3,6 @@ const USER_TYPE = {
   teacher: "teacher",
 };
 
-export type UserType = keyof typeof USER_TYPE;
+type UserType = keyof typeof USER_TYPE;
+
+export default UserType;
