@@ -28,7 +28,7 @@ const LoginScreen: React.FC = () => {
       return;
     }
 
-    router.replace("/teacher");
+    router.replace(`/${loginResult.userType}`);
 
     setIsLoading(false);
 

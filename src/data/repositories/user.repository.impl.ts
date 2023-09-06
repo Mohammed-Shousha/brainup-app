@@ -4,6 +4,7 @@ import User from "@/domain/entities/user.entity";
 import IUserRepository from "@/domain/repositories/user.repository";
 
 import ApiResponse from "@/core/types/api-response.type";
+import LoginResponse from "@/core/types/login-response.type";
 
 import { sendRequest } from "@/core/utils/helpers";
 
@@ -40,17 +41,22 @@ export default class UserRepository implements IUserRepository {
     };
   }
 
-  async login(username: string, password: string): Promise<ApiResponse> {
+  async login(username: string, password: string): Promise<LoginResponse> {
     const loginResponse = await sendRequest(LOGIN_URL, "POST", {
       user: username,
       password,
     });
+
+    if (loginResponse.status === "success") {
+      await AsyncStorage.setItem("token", loginResponse.token);
+    }
 
     console.log({ loginResponse });
 
     return {
       status: loginResponse.status,
       message: loginResponse.message,
+      userType: loginResponse["user-type"],
     };
   }
 
