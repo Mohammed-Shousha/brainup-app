@@ -1,9 +1,9 @@
 import IClassroomRepository from "@/domain/repositories/classroom.repository";
 
-export default class CreateClassroomUseCase {
+export default class JoinClassroomUseCase {
   constructor(private classroomRepository: IClassroomRepository) {}
 
-  async execute(name: string) {
-    return await this.classroomRepository.create(name);
+  async execute(code: string) {
+    return await this.classroomRepository.join(code);
   }
 }

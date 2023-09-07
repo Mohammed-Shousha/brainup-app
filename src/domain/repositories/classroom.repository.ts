@@ -1,10 +1,12 @@
+import ApiResponse from "@/core/types/api-response.type";
 import Classroom from "@/domain/entities/classroom.entity";
 
 export default interface IClassroomRepository {
-  create(classroom: Classroom): Promise<Classroom>;
+  create(name: string): Promise<Classroom>;
   delete(id: string): Promise<void>;
-  getById(id: string): Promise<Classroom>;
-  getByUser(userId: string): Promise<Classroom[]>;
-  addStudent(classroomId: string, studentId: string): Promise<Classroom>;
-  removeStudent(classroomId: string, studentId: string): Promise<Classroom>;
+  getClassroom(id: string): Promise<Classroom>;
+  getClassrooms(): Promise<Classroom[]>;
+  approveStudent(requestId: string): Promise<ApiResponse>;
+  rejectStudent(requestId: string): Promise<ApiResponse>;
+  join(code: string): Promise<ApiResponse>;
 }

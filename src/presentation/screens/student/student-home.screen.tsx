@@ -1,27 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { router } from "expo-router";
 
 import { useClassroomUseCases } from "@/presentation/context/classroom.context";
-import { useUser } from "@/presentation/context/user.context";
 
 import Heading from "@/presentation/components/heading.component";
 import Button from "@/presentation/components/button.component";
+import Input from "@/presentation/components/input.component";
 
 import globalStyles from "@/presentation/styles/global.styles";
 
 const StudentHomeScreen = () => {
-  const { user } = useUser();
+  const [code, setCode] = useState("");
 
-  const { getUserClassrooms } = useClassroomUseCases();
+  const { joinClassroom, getClassrooms } = useClassroomUseCases();
+
+  const handleJoinClassroom = async () => {
+    const joinClassroomResult = await joinClassroom.execute(code);
+
+    alert(joinClassroomResult.message);
+  };
 
   useEffect(() => {
-    const getClassrooms = async () => {
-      const userClassrooms = await getUserClassrooms.execute(user);
+    const getClassroomsData = async () => {
+      const userClassrooms = await getClassrooms.execute();
+
       console.log({ userClassrooms });
     };
 
-    getClassrooms();
+    getClassroomsData();
   }, []);
 
   return (
@@ -31,6 +38,13 @@ const StudentHomeScreen = () => {
         title="To Classroom"
         onPress={() => router.push("/student/classroom/classroom-id")}
       />
+      <Input
+        label="Code"
+        placeholder="Code"
+        value={code}
+        onChangeText={setCode}
+      />
+      <Button title="Join Classroom" onPress={handleJoinClassroom} />
     </View>
   );
 };
