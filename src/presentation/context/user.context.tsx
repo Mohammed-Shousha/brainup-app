@@ -1,5 +1,4 @@
-import { createContext, useState, useContext } from "react";
-import User from "@/domain/entities/user.entity";
+import { createContext, useContext } from "react";
 
 import UserRepository from "@/data/repositories/user.repository.impl";
 
@@ -15,18 +14,7 @@ const registerUserUseCase = new RegisterUserUseCase(userRepository);
 const confirmEmailUseCase = new ConfirmEmailUseCase(userRepository);
 const resetPasswordUseCase = new ResetPasswordUseCase(userRepository);
 
-const userMock: User = {
-  name: "context user",
-  email: "context@email.com",
-  password: "123456",
-  username: "contextuser",
-  phone: "01234567890",
-  type: "student",
-};
-
 type UserContextType = {
-  user: User;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
   useCases: {
     login: LoginUserUseCase;
     register: RegisterUserUseCase;
@@ -35,18 +23,18 @@ type UserContextType = {
   };
 };
 
-export const UserContext = createContext<UserContextType>({
-  user: userMock,
-  setUser: () => {},
+const userContextDefaultValue: UserContextType = {
   useCases: {
     login: loginUserUseCase,
     register: registerUserUseCase,
     confirmEmail: confirmEmailUseCase,
     resetPassword: resetPasswordUseCase,
   },
-});
+};
 
-export const useUser = () => useContext(UserContext);
+export const UserContext = createContext<UserContextType>(
+  userContextDefaultValue
+);
 
 export const useUserUseCases = () => useContext(UserContext).useCases;
 
@@ -55,21 +43,8 @@ type UserProviderProps = {
 };
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User>(userMock);
-
   return (
-    <UserContext.Provider
-      value={{
-        user,
-        setUser,
-        useCases: {
-          login: loginUserUseCase,
-          register: registerUserUseCase,
-          confirmEmail: confirmEmailUseCase,
-          resetPassword: resetPasswordUseCase,
-        },
-      }}
-    >
+    <UserContext.Provider value={userContextDefaultValue}>
       {children}
     </UserContext.Provider>
   );
