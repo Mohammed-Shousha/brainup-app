@@ -13,7 +13,7 @@ import globalStyles from "@/presentation/styles/global.styles";
 import Input from "@/presentation/components/input.component";
 
 const TeacherHomeScreen = () => {
-  const { getClassrooms, createClassroom } = useClassroomUseCases();
+  const { getTeacherClassrooms, createClassroom } = useClassroomUseCases();
 
   const [classroomName, setClassroomName] = useState<string>("");
   const [classrooms, setClassrooms] = useState<Classroom[]>([]);
@@ -24,16 +24,16 @@ const TeacherHomeScreen = () => {
   };
 
   useEffect(() => {
-    const getClassroomsData = async () => {
+    const getClassrooms = async () => {
       try {
-        const userClassrooms = await getClassrooms.execute();
+        const userClassrooms = await getTeacherClassrooms.execute();
         setClassrooms(userClassrooms);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     };
 
-    getClassroomsData();
+    getClassrooms();
   }, []);
 
   return (
@@ -43,7 +43,7 @@ const TeacherHomeScreen = () => {
       {classrooms.map((classroom) => (
         <Button
           key={classroom.id}
-          title={classroom.code}
+          title={classroom.code ?? ""}
           onPress={() => router.push(`/teacher/classroom/${classroom.id}`)}
         />
       ))}

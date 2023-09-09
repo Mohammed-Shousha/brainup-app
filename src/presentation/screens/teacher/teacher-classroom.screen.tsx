@@ -17,8 +17,12 @@ import StyledText from "@/presentation/components/text.component";
 const TeacherClassroomScreen = () => {
   const { classroom_id } = useLocalSearchParams();
 
-  const { getClassroom, deleteClassroom, approveStudent, rejectStudent } =
-    useClassroomUseCases();
+  const {
+    getTeacherClassroom,
+    deleteClassroom,
+    approveStudent,
+    rejectStudent,
+  } = useClassroomUseCases();
 
   // const { createLesson } = useLessonUseCases();
 
@@ -66,20 +70,20 @@ const TeacherClassroomScreen = () => {
   // };
 
   useEffect(() => {
-    const getClassroomData = async () => {
+    const getClassroom = async () => {
       if (!classroom_id) return;
 
       if (typeof classroom_id !== "string") return;
 
       try {
-        const classroomResult = await getClassroom.execute(classroom_id);
+        const classroomResult = await getTeacherClassroom.execute(classroom_id);
         setClassroom(classroomResult);
       } catch (error) {
         console.log(error);
       }
     };
 
-    getClassroomData();
+    getClassroom();
   }, []);
 
   return (
