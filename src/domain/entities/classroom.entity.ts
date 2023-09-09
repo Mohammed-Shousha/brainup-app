@@ -10,8 +10,9 @@ interface Student {
 
 export default interface Classroom {
   id: string;
-  code: string;
+  code?: string;
   name?: string;
+  teacher?: string;
   students?: Student[];
   requests?: ClassroomRequest[];
   announcments?: string[];

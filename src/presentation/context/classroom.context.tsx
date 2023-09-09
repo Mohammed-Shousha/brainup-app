@@ -4,31 +4,40 @@ import ClassroomRepository from "@/data/repositories/classroom.repository.impl";
 
 import CreateClassroomUseCase from "@/domain/usecases/classroom/create-classroom.usecase";
 import DeleteClassroomUseCase from "@/domain/usecases/classroom/delete-classroom.usecase";
-import GetClassroomUseCase from "@/domain/usecases/classroom/get-classroom.usecase";
-import GetClassroomsUseCase from "@/domain/usecases/classroom/get-classrooms.usecase";
-import JoinClassroomUseCase from "@/domain/usecases/classroom/join-classroom.usecase";
+import GetTeacherClassroomUseCase from "@/domain/usecases/classroom/get-teacher-classroom.usecase";
+import GetTeacherClassroomsUseCase from "@/domain/usecases/classroom/get-teacher-classrooms.usecase";
 import ApproveStudentUseCase from "@/domain/usecases/classroom/approve-student.usecase";
 import RejectStudentUseCase from "@/domain/usecases/classroom/reject-student.usecase";
+import JoinClassroomUseCase from "@/domain/usecases/classroom/join-classroom.usecase";
+import GetStudentClassroomsUseCase from "@/domain/usecases/classroom/get-student-classrooms.usecase";
 
 const classroomRepository = new ClassroomRepository();
 
 const createClassroomUseCase = new CreateClassroomUseCase(classroomRepository);
 const deleteClassroomUseCase = new DeleteClassroomUseCase(classroomRepository);
-const getClassroomUseCase = new GetClassroomUseCase(classroomRepository);
-const getClassroomsUseCase = new GetClassroomsUseCase(classroomRepository);
-const joinClassroomUseCase = new JoinClassroomUseCase(classroomRepository);
+const getTeacherClassroomUseCase = new GetTeacherClassroomUseCase(
+  classroomRepository
+);
+const getTeacherClassroomsUseCase = new GetTeacherClassroomsUseCase(
+  classroomRepository
+);
 const approveStudentUseCase = new ApproveStudentUseCase(classroomRepository);
 const rejectStudentUseCase = new RejectStudentUseCase(classroomRepository);
+const joinClassroomUseCase = new JoinClassroomUseCase(classroomRepository);
+const getStudentClassroomsUseCase = new GetStudentClassroomsUseCase(
+  classroomRepository
+);
 
 type ClassroomContextType = {
   useCases: {
     createClassroom: CreateClassroomUseCase;
     deleteClassroom: DeleteClassroomUseCase;
-    getClassroom: GetClassroomUseCase;
-    getClassrooms: GetClassroomsUseCase;
-    joinClassroom: JoinClassroomUseCase;
+    getTeacherClassroom: GetTeacherClassroomUseCase;
+    getTeacherClassrooms: GetTeacherClassroomsUseCase;
     approveStudent: ApproveStudentUseCase;
     rejectStudent: RejectStudentUseCase;
+    joinClassroom: JoinClassroomUseCase;
+    getStudentClassrooms: GetStudentClassroomsUseCase;
   };
 };
 
@@ -36,11 +45,12 @@ const classroomContextDefaultValue: ClassroomContextType = {
   useCases: {
     createClassroom: createClassroomUseCase,
     deleteClassroom: deleteClassroomUseCase,
-    getClassroom: getClassroomUseCase,
-    getClassrooms: getClassroomsUseCase,
-    joinClassroom: joinClassroomUseCase,
+    getTeacherClassroom: getTeacherClassroomUseCase,
+    getTeacherClassrooms: getTeacherClassroomsUseCase,
     approveStudent: approveStudentUseCase,
     rejectStudent: rejectStudentUseCase,
+    joinClassroom: joinClassroomUseCase,
+    getStudentClassrooms: getStudentClassroomsUseCase,
   },
 };
 

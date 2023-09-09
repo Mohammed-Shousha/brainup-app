@@ -10,6 +10,7 @@ import {
   TEACHER_GET_CLASSROOM_URL,
   TEACHER_CLASSROOM_APPROVE_URL,
   TEACHER_CLASSROOM_REJECT_URL,
+  STUDENT_GET_CLASSROOMS_URL,
 } from "@/core/utils/constants";
 import ApiResponse from "@/core/types/api-response.type";
 
@@ -39,34 +40,34 @@ export default class ClassroomRepository implements IClassroomRepository {
     throw new Error("Method not implemented.");
   }
 
-  async getClassroom(id: string): Promise<Classroom> {
-    const getClassroomResponse = await sendAuthRequest(
+  async getTeacherClassroom(id: string): Promise<Classroom> {
+    const getTeacherClassroomResponse = await sendAuthRequest(
       TEACHER_GET_CLASSROOM_URL(id),
       "GET"
     );
 
-    console.log({ getClassroomResponse });
+    console.log({ getTeacherClassroomResponse });
 
-    if (getClassroomResponse.status === "failed")
-      throw new Error(getClassroomResponse.message);
+    if (getTeacherClassroomResponse.status === "failed")
+      throw new Error(getTeacherClassroomResponse.message);
 
-    const classroom: Classroom = getClassroomResponse.classroom;
+    const classroom: Classroom = getTeacherClassroomResponse.classroom;
 
     return classroom;
   }
 
-  async getClassrooms(): Promise<Classroom[]> {
-    const getClassroomsResponse = await sendAuthRequest(
+  async getTeacherClassrooms(): Promise<Classroom[]> {
+    const getTeacherClassroomsResponse = await sendAuthRequest(
       TEACHER_GET_CLASSROOMS_URL,
       "GET"
     );
 
-    console.log({ getClassroomsResponse });
+    console.log({ getTeacherClassroomsResponse });
 
-    if (getClassroomsResponse.status === "failed")
-      throw new Error(getClassroomsResponse.message);
+    if (getTeacherClassroomsResponse.status === "failed")
+      throw new Error(getTeacherClassroomsResponse.message);
 
-    const classrooms: Classroom[] = getClassroomsResponse.classrooms;
+    const classrooms: Classroom[] = getTeacherClassroomsResponse.classrooms;
 
     return classrooms;
   }
@@ -120,5 +121,26 @@ export default class ClassroomRepository implements IClassroomRepository {
     console.log({ joinClassroomResponse });
 
     return joinClassroomResponse;
+  }
+
+  async getStudentClassrooms(): Promise<Classroom[]> {
+    const getStudentClassroomsResponse = await sendAuthRequest(
+      STUDENT_GET_CLASSROOMS_URL,
+      "GET"
+    );
+
+    console.log({ getStudentClassroomsResponse });
+
+    if (getStudentClassroomsResponse.status === "failed")
+      throw new Error(getStudentClassroomsResponse.message);
+
+    const classrooms: Classroom[] = getStudentClassroomsResponse.classrooms.map(
+      (classroom: any) => ({
+        ...classroom,
+        teacher: classroom.teacher_name,
+      })
+    );
+
+    return classrooms;
   }
 }
