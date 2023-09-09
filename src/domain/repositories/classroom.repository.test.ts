@@ -24,11 +24,12 @@ describe("IClassroomRepository", () => {
     classroomRepository = {
       create: jest.fn().mockResolvedValue(classroomMock),
       delete: jest.fn(),
-      getClassroom: jest.fn().mockResolvedValue(classroomMock),
-      getClassrooms: jest.fn().mockResolvedValue(classroomsMock),
+      getTeacherClassroom: jest.fn().mockResolvedValue(classroomMock),
+      getTeacherClassrooms: jest.fn().mockResolvedValue(classroomsMock),
       approveStudent: jest.fn().mockResolvedValue(apiResponseMock),
       rejectStudent: jest.fn().mockResolvedValue(apiResponseMock),
       join: jest.fn().mockResolvedValue(apiResponseMock),
+      getStudentClassrooms: jest.fn().mockResolvedValue(classroomsMock),
     };
   });
 
@@ -52,19 +53,19 @@ describe("IClassroomRepository", () => {
     });
   });
 
-  describe("getClassroom", () => {
+  describe("getTeacherClassroom", () => {
     it("should retrieve a classroom with the specified ID", async () => {
       const classroomId = "1";
 
-      const result = await classroomRepository.getClassroom(classroomId);
+      const result = await classroomRepository.getTeacherClassroom(classroomId);
 
       expect(result).toEqual(classroomMock);
     });
   });
 
-  describe("getClassrooms", () => {
+  describe("getTeacherClassrooms", () => {
     it("should retrieve a list of classrooms", async () => {
-      const result = await classroomRepository.getClassrooms();
+      const result = await classroomRepository.getTeacherClassrooms();
 
       expect(result).toEqual(classroomsMock);
     });
@@ -97,6 +98,14 @@ describe("IClassroomRepository", () => {
       const result = await classroomRepository.join(code);
 
       expect(result).toEqual(apiResponseMock);
+    });
+  });
+
+  describe("getStudentClassrooms", () => {
+    it("should retrieve a list of classrooms", async () => {
+      const result = await classroomRepository.getStudentClassrooms();
+
+      expect(result).toEqual(classroomsMock);
     });
   });
 });

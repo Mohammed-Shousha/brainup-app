@@ -10,6 +10,7 @@ import {
   TEACHER_GET_CLASSROOM_URL,
   TEACHER_CLASSROOM_APPROVE_URL,
   TEACHER_CLASSROOM_REJECT_URL,
+  STUDENT_GET_CLASSROOMS_URL,
 } from "@/core/utils/constants";
 
 jest.mock("@/core/utils/helpers", () => ({
@@ -55,7 +56,7 @@ describe("ClassroomRepository", () => {
     });
   });
 
-  describe("getClassroom", () => {
+  describe("getTeacherClassroom", () => {
     it("should get a classroom by id", async () => {
       const classroomId = "123";
 
@@ -70,7 +71,9 @@ describe("ClassroomRepository", () => {
 
       (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
 
-      const classroom = await classroomRepository.getClassroom(classroomId);
+      const classroom = await classroomRepository.getTeacherClassroom(
+        classroomId
+      );
 
       expect(sendAuthRequest).toHaveBeenCalledWith(
         TEACHER_GET_CLASSROOM_URL(classroomId),
@@ -81,8 +84,8 @@ describe("ClassroomRepository", () => {
     });
   });
 
-  describe("getClassrooms", () => {
-    it("should get all classrooms", async () => {
+  describe("getTeacherClassrooms", () => {
+    it("should get all teacher classrooms", async () => {
       const expectedResponse = {
         status: "success",
         classrooms: [
@@ -96,7 +99,7 @@ describe("ClassroomRepository", () => {
 
       (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
 
-      const classrooms = await classroomRepository.getClassrooms();
+      const classrooms = await classroomRepository.getTeacherClassrooms();
 
       expect(sendAuthRequest).toHaveBeenCalledWith(
         TEACHER_GET_CLASSROOMS_URL,
@@ -180,6 +183,33 @@ describe("ClassroomRepository", () => {
       );
 
       expect(response).toEqual(expectedResponse);
+    });
+  });
+
+  describe("getStudentClassrooms", () => {
+    it("should get all student classrooms", async () => {
+      const expectedResponse = {
+        status: "success",
+        classrooms: [
+          {
+            id: "123",
+            name: "Test Classroom",
+            teacher: "teacher",
+          },
+        ],
+      };
+
+      (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
+
+      const classrooms = await classroomRepository.getStudentClassrooms();
+
+      expect(sendAuthRequest).toHaveBeenCalledWith(
+        STUDENT_GET_CLASSROOMS_URL,
+        "GET"
+      );
+
+      expect(classrooms).toBeInstanceOf(Array);
+      expect(classrooms).toHaveLength(1);
     });
   });
 });
