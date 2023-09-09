@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { router } from "expo-router";
 
+import Classroom from "@/domain/entities/classroom.entity";
+
 import { useClassroomUseCases } from "@/presentation/context/classroom.context";
 
 import Heading from "@/presentation/components/heading.component";
@@ -12,8 +14,9 @@ import globalStyles from "@/presentation/styles/global.styles";
 
 const StudentHomeScreen = () => {
   const [code, setCode] = useState("");
+  const [classrooms, setClassrooms] = useState<Classroom[]>([]);
 
-  const { joinClassroom, getClassrooms } = useClassroomUseCases();
+  const { joinClassroom, getStudentClassrooms } = useClassroomUseCases();
 
   const handleJoinClassroom = async () => {
     const joinClassroomResult = await joinClassroom.execute(code);
@@ -22,22 +25,29 @@ const StudentHomeScreen = () => {
   };
 
   useEffect(() => {
-    const getClassroomsData = async () => {
-      const userClassrooms = await getClassrooms.execute();
-
-      console.log({ userClassrooms });
+    const getClassrooms = async () => {
+      try {
+        const userClassrooms = await getStudentClassrooms.execute();
+        setClassrooms(userClassrooms);
+      } catch (error) {
+        alert(error);
+      }
     };
 
-    getClassroomsData();
+    getClassrooms();
   }, []);
 
   return (
     <View style={globalStyles.container}>
       <Heading>Student Home Screen</Heading>
-      <Button
-        title="To Classroom"
-        onPress={() => router.push("/student/classroom/classroom-id")}
-      />
+      {classrooms.map((classroom) => (
+        <Button
+          key={classroom.id}
+          title={`${classroom.name}\nTeacher: ${classroom.teacher}`}
+          onPress={() => router.push(`/student/classroom/${classroom.id}`)}
+        />
+      ))}
+
       <Input
         label="Code"
         placeholder="Code"

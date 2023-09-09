@@ -1,43 +1,54 @@
 import { View } from "react-native";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
+
+import Classroom from "@/domain/entities/classroom.entity";
 
 import { useClassroomUseCases } from "@/presentation/context/classroom.context";
 
 import Heading from "@/presentation/components/heading.component";
 import Button from "@/presentation/components/button.component";
+import StyledText from "@/presentation/components/text.component";
 
 import globalStyles from "@/presentation/styles/global.styles";
 
 const StudentClassroomScreen = () => {
   const { classroomId } = useLocalSearchParams();
 
-  const { getClassroom } = useClassroomUseCases();
+  const [classroom, setClassroom] = useState<Classroom>();
 
-  useEffect(() => {
-    const getClassroomData = async () => {
-      if (!classroomId) return;
+  // const { getTeacherClassroom: getClassroom } = useClassroomUseCases();
 
-      if (typeof classroomId !== "string") return;
+  // useEffect(() => {
+  //   const getClassroomData = async () => {
+  //     if (!classroomId) return;
 
-      const classroom = await getClassroom.execute(classroomId);
-      console.log({ classroom });
-    };
+  //     if (typeof classroomId !== "string") return;
 
-    getClassroomData();
-  }, []);
+  //     try {
+  //       const classroom = await getClassroom.execute(classroomId);
+  //       setClassroom(classroom);
+  //       console.log({ classroom });
+  //     } catch (error) {
+  //       alert(error);
+  //     }
+  //   };
+
+  //   getClassroomData();
+  // }, []);
 
   return (
     <View style={globalStyles.container}>
       <Heading>Student Classroom Screen</Heading>
-      <Button
+      {/* <StyledText>{JSON.stringify(classroom)}</StyledText> */}
+      {/* <Button
         title="To Lesson"
         onPress={() => router.push("/student/lesson/lesson-id")}
       />
       <Button
         title="To Quiz"
         onPress={() => router.push("/student/quiz/quiz-id")}
-      />
+      /> */}
     </View>
   );
 };
