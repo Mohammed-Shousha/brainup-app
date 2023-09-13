@@ -3,13 +3,14 @@ import { Stack, SplashScreen } from "expo-router";
 import { useFonts } from "expo-font";
 
 import { Nunito_600SemiBold, Nunito_700Bold } from "@expo-google-fonts/nunito";
-
 import { Inter_500Medium } from "@expo-google-fonts/inter";
 
 import { UserProvider } from "@/presentation/context/user.context";
 import { ClassroomProvider } from "@/presentation/context/classroom.context";
 import { QuizProvider } from "@/presentation/context/quiz.context";
 import { LessonProvider } from "@/presentation/context/lesson.context";
+
+import colors from "@/presentation/styles/colors.styles";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -38,6 +39,9 @@ const HomeLayout = () => {
             <Stack
               screenOptions={{
                 headerShown: false,
+                contentStyle: {
+                  backgroundColor: colors.white,
+                },
               }}
             />
           </LessonProvider>
