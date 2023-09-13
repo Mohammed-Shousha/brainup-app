@@ -37,7 +37,7 @@ const LoginScreen: React.FC = () => {
 
   return (
     <View style={globalStyles.container}>
-      <Heading marginBottom={40}>Welcome Back !</Heading>
+      <Heading style={{ marginBottom: 40 }}>Welcome Back !</Heading>
       <Input
         label="Email"
         placeholder="Enter your email"

@@ -30,7 +30,7 @@ const EnterNewPasswordScreen: React.FC = ({}) => {
 
   return (
     <View style={globalStyles.container}>
-      <Heading bold marginBottom={40}>
+      <Heading bold style={{ marginBottom: 40 }}>
         Enter your new password
       </Heading>
 

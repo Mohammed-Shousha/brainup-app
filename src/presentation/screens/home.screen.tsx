@@ -14,7 +14,7 @@ const HomeScreen = () => {
 
   return (
     <View style={globalStyles.container}>
-      <Heading marginBottom={40}>Home</Heading>
+      <Heading style={{ marginBottom: 40 }}>Home</Heading>
 
       <Button title="Login" onPress={() => navigate("/login")} />
 

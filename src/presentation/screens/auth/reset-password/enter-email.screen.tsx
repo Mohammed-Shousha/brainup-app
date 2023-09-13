@@ -37,7 +37,11 @@ const EnterEmailScreen: React.FC = () => {
         keyboardType="email-address"
       />
 
-      <Button title="Continue" onPress={handleSendEmail} marginTop />
+      <Button
+        title="Continue"
+        onPress={handleSendEmail}
+        style={{ marginTop: 50 }}
+      />
     </View>
   );
 };

@@ -39,7 +39,7 @@ const ConfirmScreen: React.FC = () => {
         value={email}
         keyboardType="email-address"
       />
-      <Button title="Send Email" onPress={handleSendEmail} marginTop /> */}
+      <Button title="Send Email" onPress={handleSendEmail} style={{ marginTop: 50 }} /> */}
 
       <Input
         label="Code"
@@ -47,7 +47,11 @@ const ConfirmScreen: React.FC = () => {
         onChangeText={setCode}
         value={code}
       />
-      <Button title="Continue" onPress={handleVerifyCode} marginTop />
+      <Button
+        title="Continue"
+        onPress={handleVerifyCode}
+        style={{ marginTop: 50 }}
+      />
     </View>
   );
 };

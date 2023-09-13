@@ -42,7 +42,11 @@ const ResetPasswordScreen: React.FC = () => {
         keyboardType="number-pad"
       />
 
-      <Button title="Continue" onPress={handleVerifyCode} marginTop />
+      <Button
+        title="Continue"
+        onPress={handleVerifyCode}
+        style={{ marginTop: 50 }}
+      />
     </View>
   );
 };
