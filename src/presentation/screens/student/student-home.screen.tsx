@@ -1,28 +1,20 @@
 import { useEffect, useState } from "react";
-import { View } from "react-native";
-import { router } from "expo-router";
+import { View, StyleSheet } from "react-native";
 
 import Classroom from "@/domain/entities/classroom.entity";
 
 import { useClassroomUseCases } from "@/presentation/context/classroom.context";
 
+import Header from "@/presentation/components/header.component";
 import Heading from "@/presentation/components/heading.component";
-import Button from "@/presentation/components/button.component";
-import Input from "@/presentation/components/input.component";
+import Tile from "@/presentation/components/classroom-tile.component";
 
 import globalStyles from "@/presentation/styles/global.styles";
 
 const StudentHomeScreen = () => {
-  const [code, setCode] = useState("");
   const [classrooms, setClassrooms] = useState<Classroom[]>([]);
 
-  const { joinClassroom, getStudentClassrooms } = useClassroomUseCases();
-
-  const handleJoinClassroom = async () => {
-    const joinClassroomResult = await joinClassroom.execute(code);
-
-    alert(joinClassroomResult.message);
-  };
+  const { getStudentClassrooms } = useClassroomUseCases();
 
   useEffect(() => {
     const getClassrooms = async () => {
@@ -38,25 +30,36 @@ const StudentHomeScreen = () => {
   }, []);
 
   return (
-    <View style={globalStyles.container}>
-      <Heading>Student Home Screen</Heading>
-      {classrooms.map((classroom) => (
-        <Button
-          key={classroom.id}
-          title={`${classroom.name}\nTeacher: ${classroom.teacher}`}
-          onPress={() => router.push(`/student/classroom/${classroom.id}`)}
-        />
-      ))}
+    <View style={[globalStyles.container, { paddingHorizontal: 20 }]}>
+      <Header />
 
-      <Input
-        label="Code"
-        placeholder="Code"
-        value={code}
-        onChangeText={setCode}
-      />
-      <Button title="Join Classroom" onPress={handleJoinClassroom} />
+      <Heading bold style={{ fontSize: 24 }}>
+        Classrooms
+      </Heading>
+
+      <View style={[styles.gridView]}>
+        <Tile screenRoute="/student/join-classroom" showAddIcon />
+
+        {classrooms.map((classroom, i) => (
+          <Tile
+            key={classroom.id}
+            index={i}
+            title={classroom.name}
+            screenRoute={`/student/classroom/${classroom.name}`}
+          />
+        ))}
+      </View>
     </View>
   );
 };
 
 export default StudentHomeScreen;
+
+const styles = StyleSheet.create({
+  gridView: {
+    flex: 1,
+    gap: 24,
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+});
