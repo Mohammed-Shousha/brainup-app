@@ -1,35 +1,43 @@
-import { Pressable, Text, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  Pressable,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  StyleProp,
+  ViewStyle,
+} from "react-native";
 
 import colors from "@/presentation/styles/colors.styles";
 import fonts from "@/presentation/styles/fonts.styles";
 
 type ButtonProps = {
   title: string;
+  icon?: React.ReactNode;
   onPress?: () => void;
   isLoading?: boolean;
-  marginTop?: boolean;
+  inverted?: boolean;
+  style?: StyleProp<ViewStyle>;
 };
 
 const Button: React.FC<ButtonProps> = ({
   title,
+  icon,
   onPress,
   isLoading,
-  marginTop,
+  inverted,
+  style,
 }) => {
   return (
     <Pressable
       onPress={onPress}
-      style={[styles.button, marginTop && styles.marginTop]}
+      style={[styles.button, inverted && styles.inverted, style]}
       disabled={isLoading}
     >
-      {isLoading && (
-        <ActivityIndicator
-          size="small"
-          color={colors.white}
-          style={{ marginRight: 10 }}
-        />
-      )}
-      <Text style={styles.buttonText}>{isLoading ? "Loading..." : title}</Text>
+      {isLoading && <ActivityIndicator size="small" color={colors.white} />}
+      {icon}
+      <Text style={[styles.buttonText, inverted && styles.invertedText]}>
+        {isLoading ? "Loading..." : title}
+      </Text>
     </Pressable>
   );
 };
@@ -46,13 +54,19 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 15,
     marginBottom: 20,
+    gap: 8,
   },
   buttonText: {
     fontFamily: fonts.nunitoSemiBold,
     color: colors.white,
     fontSize: 20,
   },
-  marginTop: {
-    marginTop: 50,
+  inverted: {
+    backgroundColor: colors.white,
+    borderWidth: 2,
+    borderColor: colors.primary,
+  },
+  invertedText: {
+    color: colors.primary,
   },
 });

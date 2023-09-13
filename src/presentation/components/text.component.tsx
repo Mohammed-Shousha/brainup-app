@@ -1,22 +1,24 @@
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, StyleProp, TextStyle } from "react-native";
 
 import colors from "@/presentation/styles/colors.styles";
 import fonts from "@/presentation/styles/fonts.styles";
 
-type TextProps = {
+type StyledTextProps = {
   children: string | React.ReactNode;
   paragraph?: boolean;
   bold?: boolean;
   color?: keyof typeof colors;
   center?: boolean;
+  style?: StyleProp<TextStyle>;
 };
 
-const StyledText: React.FC<TextProps> = ({
+const StyledText: React.FC<StyledTextProps> = ({
   children,
   paragraph,
   bold,
   color = "black",
   center,
+  style,
 }) => {
   return (
     <Text
@@ -26,6 +28,7 @@ const StyledText: React.FC<TextProps> = ({
         paragraph && styles.paragraph,
         center && styles.center,
         { color: colors[color] },
+        style,
       ]}
     >
       {children}
