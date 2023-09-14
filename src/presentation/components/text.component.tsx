@@ -30,6 +30,7 @@ const StyledText: React.FC<StyledTextProps> = ({
         { color: colors[color] },
         style,
       ]}
+      testID="text"
     >
       {children}
     </Text>

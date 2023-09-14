@@ -35,7 +35,9 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.label} testID="label">
+        {label}
+      </Text>
       <TextInput
         style={[styles.input, isFocused && styles.inputFocused]}
         placeholder={placeholder}
@@ -46,6 +48,7 @@ const Input: React.FC<InputProps> = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         keyboardType={keyboardType}
+        testID="input"
       />
     </>
   );

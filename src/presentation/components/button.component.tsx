@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   StyleProp,
   ViewStyle,
+  View,
 } from "react-native";
 
 import colors from "@/presentation/styles/colors.styles";
@@ -25,17 +26,29 @@ const Button: React.FC<ButtonProps> = ({
   onPress,
   isLoading,
   inverted,
-  style,
+  style = {},
 }) => {
   return (
     <Pressable
       onPress={onPress}
       style={[styles.button, inverted && styles.inverted, style]}
       disabled={isLoading}
+      testID="button"
     >
-      {isLoading && <ActivityIndicator size="small" color={colors.white} />}
-      {icon}
-      <Text style={[styles.buttonText, inverted && styles.invertedText]}>
+      {isLoading && (
+        <ActivityIndicator
+          size="small"
+          color={colors.white}
+          testID="loading-indicator"
+        />
+      )}
+
+      <View testID="button-icon">{icon}</View>
+
+      <Text
+        style={[styles.buttonText, inverted && styles.invertedText]}
+        testID="button-text"
+      >
         {isLoading ? "Loading..." : title}
       </Text>
     </Pressable>

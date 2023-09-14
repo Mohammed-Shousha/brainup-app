@@ -21,7 +21,7 @@ const TILE_COLORS = [
   colors.secondary,
 ];
 
-const Tile: React.FC<TileProps> = ({
+const ClassroomTile: React.FC<TileProps> = ({
   title,
   screenRoute,
   showAddIcon,
@@ -41,17 +41,20 @@ const Tile: React.FC<TileProps> = ({
         { backgroundColor: showAddIcon ? colors.secondary : backgroundColor },
       ]}
       onPress={handlePress}
+      testID="tile"
     >
       {showAddIcon ? (
-        <AddIcon fill={colors.primary} />
+        <AddIcon fill={colors.primary} testID="add-icon" />
       ) : (
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title} testID="title">
+          {title}
+        </Text>
       )}
     </Pressable>
   );
 };
 
-export default Tile;
+export default ClassroomTile;
 
 const styles = StyleSheet.create({
   container: {

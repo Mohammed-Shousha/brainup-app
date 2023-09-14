@@ -11,7 +11,12 @@ type HeadingProps = {
 
 const Heading: React.FC<HeadingProps> = ({ children, bold, style }) => {
   return (
-    <Text style={[styles.heading, bold && styles.bold, style]}>{children}</Text>
+    <Text
+      style={[styles.heading, bold && styles.bold, style]}
+      testID="heading-text"
+    >
+      {children}
+    </Text>
   );
 };
 
