@@ -34,3 +34,13 @@ export const STUDENT_CLASSROOMS_URL = `${CLASSROOMS_URL}/student`;
 export const STUDENT_GET_CLASSROOMS_URL = `${STUDENT_CLASSROOMS_URL}/get`;
 
 export const STUDENT_JOIN_CLASSROOM_URL = `${STUDENT_CLASSROOMS_URL}/join`;
+
+// Quizzes
+
+// teacher
+
+export const TEACHER_QUIZZES_URL = `${API_URL}/quizes/teacher`;
+
+export const TEACHER_CREATE_QUIZ_URL = `${TEACHER_QUIZZES_URL}/create`;
+
+export const TEACHER_GET_QUIZZES_URL = `${TEACHER_QUIZZES_URL}/get`;

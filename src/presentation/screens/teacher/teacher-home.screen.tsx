@@ -11,6 +11,7 @@ import Button from "@/presentation/components/button.component";
 
 import globalStyles from "@/presentation/styles/global.styles";
 import Input from "@/presentation/components/input.component";
+import { ScrollView } from "react-native-gesture-handler";
 
 const TeacherHomeScreen = () => {
   const { getTeacherClassrooms, createClassroom } = useClassroomUseCases();
@@ -40,13 +41,15 @@ const TeacherHomeScreen = () => {
     <View style={globalStyles.container}>
       <Heading>Teacher Home Screen</Heading>
 
-      {classrooms.map((classroom) => (
-        <Button
-          key={classroom.id}
-          title={classroom.code ?? ""}
-          onPress={() => router.push(`/teacher/classroom/${classroom.id}`)}
-        />
-      ))}
+      <ScrollView>
+        {classrooms.map((classroom) => (
+          <Button
+            key={classroom.id}
+            title={`${classroom.id}: ${classroom.code}`}
+            onPress={() => router.push(`/teacher/classroom/${classroom.id}`)}
+          />
+        ))}
+      </ScrollView>
 
       <Input
         label="Classroom Name"

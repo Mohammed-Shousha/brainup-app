@@ -1,28 +1,6 @@
-type Question =
-  | MultipleChoiceQuestion
-  | TrueFalseQuestion
-  | FillInBlankQuestion
-  | ShortAnswerQuestion;
-
-export default Question;
-
-interface MultipleChoiceQuestion {
-  type: "multiple-choice";
-  options: string[];
+export default interface Question {
+  question: string;
+  mark: number;
   answer: string;
-}
-
-interface TrueFalseQuestion {
-  type: "true-false";
-  answer: boolean;
-}
-
-interface FillInBlankQuestion {
-  type: "fill-in-blank";
-  answer: string;
-}
-
-interface ShortAnswerQuestion {
-  type: "short-answer";
-  answer: string;
+  choices: string[];
 }

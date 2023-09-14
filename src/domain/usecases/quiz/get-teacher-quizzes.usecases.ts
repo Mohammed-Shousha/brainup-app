@@ -1,9 +1,9 @@
 import IQuizRepository from "@/domain/repositories/quiz.repository";
 
-export default class GetQuizUseCase {
+export default class GetTeacherQuizzesUseCase {
   constructor(private readonly quizRepository: IQuizRepository) {}
 
-  async execute(quizId: string) {
-    return await this.quizRepository.getById(quizId);
+  async execute() {
+    return await this.quizRepository.getTeacherQuizzes();
   }
 }

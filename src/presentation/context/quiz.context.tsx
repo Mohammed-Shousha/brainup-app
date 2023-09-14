@@ -3,34 +3,30 @@ import { createContext, useContext } from "react";
 import QuizRepository from "@/data/repositories/quiz.repository.impl";
 
 import CreateQuizUseCase from "@/domain/usecases/quiz/create-quiz.usecase";
-import UpdateQuizUseCase from "@/domain/usecases/quiz/update-quiz.usecase";
-import DeleteQuizUseCase from "@/domain/usecases/quiz/delete-quiz.usecase";
-import GetQuizUseCase from "@/domain/usecases/quiz/get-quiz.usecases";
+import GetTeacherQuizzesUseCase from "@/domain/usecases/quiz/get-teacher-quizzes.usecases";
 
 const quizRepository = new QuizRepository();
 
 const createQuizUseCase = new CreateQuizUseCase(quizRepository);
-const updateQuizUseCase = new UpdateQuizUseCase(quizRepository);
-const deleteQuizUseCase = new DeleteQuizUseCase(quizRepository);
-const getQuizUseCase = new GetQuizUseCase(quizRepository);
+const getTeacherQuizzesUseCase = new GetTeacherQuizzesUseCase(quizRepository);
 
 type QuizContextType = {
   useCases: {
     createQuiz: CreateQuizUseCase;
-    updateQuiz: UpdateQuizUseCase;
-    deleteQuiz: DeleteQuizUseCase;
-    getQuiz: GetQuizUseCase;
+    getTeacherQuizzes: GetTeacherQuizzesUseCase;
   };
 };
 
-export const QuizContext = createContext<QuizContextType>({
+const quizContextDefaultValue: QuizContextType = {
   useCases: {
     createQuiz: createQuizUseCase,
-    updateQuiz: updateQuizUseCase,
-    deleteQuiz: deleteQuizUseCase,
-    getQuiz: getQuizUseCase,
+    getTeacherQuizzes: getTeacherQuizzesUseCase,
   },
-});
+};
+
+export const QuizContext = createContext<QuizContextType>(
+  quizContextDefaultValue
+);
 
 export const useQuizUseCases = () => useContext(QuizContext).useCases;
 
@@ -40,16 +36,7 @@ type QuizProviderProps = {
 
 export const QuizProvider: React.FC<QuizProviderProps> = ({ children }) => {
   return (
-    <QuizContext.Provider
-      value={{
-        useCases: {
-          createQuiz: createQuizUseCase,
-          updateQuiz: updateQuizUseCase,
-          deleteQuiz: deleteQuizUseCase,
-          getQuiz: getQuizUseCase,
-        },
-      }}
-    >
+    <QuizContext.Provider value={quizContextDefaultValue}>
       {children}
     </QuizContext.Provider>
   );

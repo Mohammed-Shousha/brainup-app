@@ -1,8 +1,7 @@
+import ApiResponse from "@/core/types/api-response.type";
 import Quiz from "@/domain/entities/quiz.entity";
 
 export default interface IQuizRepository {
-  create(quiz: Quiz): Promise<Quiz>;
-  update(quiz: Quiz): Promise<Quiz>;
-  delete(id: string): Promise<void>;
-  getById(id: string): Promise<Quiz>;
+  create(quiz: Quiz): Promise<ApiResponse>;
+  getTeacherQuizzes(): Promise<Quiz[]>;
 }
