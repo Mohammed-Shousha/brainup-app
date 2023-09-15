@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 
 import Classroom from "@/domain/entities/classroom.entity";
 
@@ -14,6 +14,7 @@ import SelectorButton from "@/presentation/components/selector-button.component"
 import colors from "@/presentation/styles/colors.styles";
 
 import globalStyles from "@/presentation/styles/global.styles";
+import QuizTile from "@/presentation/components/quiz-tile.component";
 
 const StudentClassroomScreen = () => {
   const { classroom_id } = useLocalSearchParams();
@@ -24,62 +25,31 @@ const StudentClassroomScreen = () => {
 
   const [classroom, setClassroom] = useState<Classroom>();
 
-  const [lessons, setLessons] = useState([
-    {
-      id: "1",
-      name: "Lesson 1",
-    },
-    {
-      id: "2",
-      name: "Lesson 2",
-    },
-    {
-      id: "3",
-      name: "Lesson 3",
-    },
-  ]);
+  const { getStudentClassroom } = useClassroomUseCases();
 
-  const [quizzes, setQuizzes] = useState([
-    {
-      id: "1",
-      name: "Quiz 1",
-    },
-    {
-      id: "2",
-      name: "Quiz 2",
-    },
-    {
-      id: "3",
-      name: "Quiz 3",
-    },
-  ]);
+  useEffect(() => {
+    const getClassroom = async () => {
+      if (!classroom_id) return;
 
-  // const { getTeacherClassroom: getClassroom } = useClassroomUseCases();
+      if (typeof classroom_id !== "string") return;
 
-  // useEffect(() => {
-  //   const getClassroomData = async () => {
-  //     if (!classroomId) return;
+      try {
+        const classroom = await getStudentClassroom.execute(classroom_id);
+        setClassroom(classroom);
+      } catch (getStudentClassroomError) {
+        console.log({ getStudentClassroomError });
+      }
+    };
 
-  //     if (typeof classroomId !== "string") return;
-
-  //     try {
-  //       const classroom = await getClassroom.execute(classroomId);
-  //       setClassroom(classroom);
-  //       console.log({ classroom });
-  //     } catch (error) {
-  //       alert(error);
-  //     }
-  //   };
-
-  //   getClassroomData();
-  // }, []);
+    getClassroom();
+  }, []);
 
   return (
     <View style={[globalStyles.container, { paddingHorizontal: 20 }]}>
       <Header />
 
       <Heading bold style={{ fontSize: 24 }}>
-        {`${classroom_id}`}
+        {`${classroom?.name}`}
       </Heading>
 
       <View style={styles.selectorContainer}>
@@ -102,11 +72,16 @@ const StudentClassroomScreen = () => {
 
       <View style={{ flex: 1 }}>
         {activeSelector === "lessons"
-          ? lessons.map((lesson) => (
-              <LessonTile key={lesson.id} lessonName={lesson.name} />
+          ? classroom?.lessons?.map((lesson) => (
+              <LessonTile
+                key={lesson.id}
+                lessonName={lesson.name}
+                pdf={lesson.pdf?.content}
+                video={lesson.video?.content}
+              />
             ))
-          : quizzes.map((quiz) => (
-              <LessonTile key={quiz.id} lessonName={quiz.name} />
+          : classroom?.quizzes?.map((quiz) => (
+              <QuizTile key={quiz.id} quizId={quiz.id} quizName={quiz.name} />
             ))}
       </View>
     </View>

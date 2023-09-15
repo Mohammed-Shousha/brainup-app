@@ -10,6 +10,7 @@ import ApproveStudentUseCase from "@/domain/usecases/classroom/approve-student.u
 import RejectStudentUseCase from "@/domain/usecases/classroom/reject-student.usecase";
 import JoinClassroomUseCase from "@/domain/usecases/classroom/join-classroom.usecase";
 import GetStudentClassroomsUseCase from "@/domain/usecases/classroom/get-student-classrooms.usecase";
+import GetStudentClassroomUseCase from "@/domain/usecases/classroom/get-student-classsroom.usecase";
 
 const classroomRepository = new ClassroomRepository();
 
@@ -27,6 +28,9 @@ const joinClassroomUseCase = new JoinClassroomUseCase(classroomRepository);
 const getStudentClassroomsUseCase = new GetStudentClassroomsUseCase(
   classroomRepository
 );
+const getStudentClassroomUseCase = new GetStudentClassroomUseCase(
+  classroomRepository
+);
 
 type ClassroomContextType = {
   useCases: {
@@ -38,6 +42,7 @@ type ClassroomContextType = {
     rejectStudent: RejectStudentUseCase;
     joinClassroom: JoinClassroomUseCase;
     getStudentClassrooms: GetStudentClassroomsUseCase;
+    getStudentClassroom: GetStudentClassroomUseCase;
   };
 };
 
@@ -51,6 +56,7 @@ const classroomContextDefaultValue: ClassroomContextType = {
     rejectStudent: rejectStudentUseCase,
     joinClassroom: joinClassroomUseCase,
     getStudentClassrooms: getStudentClassroomsUseCase,
+    getStudentClassroom: getStudentClassroomUseCase,
   },
 };
 

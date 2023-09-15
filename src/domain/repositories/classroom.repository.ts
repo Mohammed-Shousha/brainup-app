@@ -10,4 +10,5 @@ export default interface IClassroomRepository {
   rejectStudent(requestId: string): Promise<ApiResponse>;
   join(code: string): Promise<ApiResponse>;
   getStudentClassrooms(): Promise<Classroom[]>;
+  getStudentClassroom(id: string): Promise<Classroom>;
 }
