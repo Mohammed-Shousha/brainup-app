@@ -7,7 +7,7 @@ import { useClassroomUseCases } from "@/presentation/context/classroom.context";
 
 import Header from "@/presentation/components/header.component";
 import Heading from "@/presentation/components/heading.component";
-import Tile from "@/presentation/components/classroom-tile.component";
+import ClassroomTile from "@/presentation/components/classroom-tile.component";
 
 import globalStyles from "@/presentation/styles/global.styles";
 
@@ -38,14 +38,14 @@ const StudentHomeScreen = () => {
       </Heading>
 
       <View style={[styles.gridView]}>
-        <Tile screenRoute="/student/join-classroom" showAddIcon />
+        <ClassroomTile screenRoute="/student/join-classroom" showAddIcon />
 
         {classrooms.map((classroom, i) => (
-          <Tile
+          <ClassroomTile
             key={classroom.id}
             index={i}
             title={classroom.name}
-            screenRoute={`/student/classroom/${classroom.name}`}
+            screenRoute={`/student/classroom/${classroom.id}`}
           />
         ))}
       </View>
