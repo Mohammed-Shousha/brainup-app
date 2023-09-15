@@ -7,10 +7,6 @@ import SettingsIcon from "@/presentation/components/icons/settings.icon";
 import colors from "@/presentation/styles/colors.styles";
 import fonts from "@/presentation/styles/fonts.styles";
 
-const hidingOptions = {
-  href: null,
-};
-
 const tabBarLabelStyle = {
   fontFamily: fonts.nunitoBold,
   fontSize: 10,
@@ -22,7 +18,7 @@ const StudentLayout = () => (
     screenOptions={{
       headerShown: false,
       tabBarActiveTintColor: colors.white,
-      tabBarInactiveTintColor: colors.ultraLightGray,
+      tabBarInactiveTintColor: colors.extraLightGray,
       tabBarHideOnKeyboard: true,
       tabBarStyle: {
         backgroundColor: colors.primary,
