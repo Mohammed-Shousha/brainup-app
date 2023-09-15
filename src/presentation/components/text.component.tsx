@@ -10,6 +10,7 @@ type StyledTextProps = {
   color?: keyof typeof colors;
   center?: boolean;
   style?: StyleProp<TextStyle>;
+  selectable?: boolean;
 };
 
 const StyledText: React.FC<StyledTextProps> = ({
@@ -18,6 +19,7 @@ const StyledText: React.FC<StyledTextProps> = ({
   bold,
   color = "black",
   center,
+  selectable,
   style,
 }) => {
   return (
@@ -31,6 +33,7 @@ const StyledText: React.FC<StyledTextProps> = ({
         style,
       ]}
       testID="text"
+      selectable={selectable}
     >
       {children}
     </Text>

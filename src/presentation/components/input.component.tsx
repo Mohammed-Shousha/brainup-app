@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Text, TextInput, StyleSheet } from "react-native";
+import {
+  Text,
+  TextInput,
+  StyleSheet,
+  StyleProp,
+  TextStyle,
+} from "react-native";
 
 import colors from "@/presentation/styles/colors.styles";
 import fonts from "@/presentation/styles/fonts.styles";
@@ -17,6 +23,7 @@ type InputProps = {
     | "numeric"
     | "email-address"
     | "phone-pad";
+  style?: StyleProp<TextStyle>;
 };
 
 const Input: React.FC<InputProps> = ({
@@ -26,6 +33,7 @@ const Input: React.FC<InputProps> = ({
   value,
   secureTextEntry = false,
   keyboardType = "default",
+  style,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -39,7 +47,7 @@ const Input: React.FC<InputProps> = ({
         {label}
       </Text>
       <TextInput
-        style={[styles.input, isFocused && styles.inputFocused]}
+        style={[styles.input, isFocused && styles.inputFocused, style]}
         placeholder={placeholder}
         onChangeText={onChangeText}
         value={value}
@@ -72,7 +80,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderWidth: 2,
     borderStyle: "solid",
-    borderColor: colors.extraLightGray,
+    borderColor: colors.ultraLightGray,
     marginBottom: 20,
   },
   inputFocused: {

@@ -12,7 +12,7 @@ import colors from "@/presentation/styles/colors.styles";
 import fonts from "@/presentation/styles/fonts.styles";
 
 type ButtonProps = {
-  title: string;
+  title?: string;
   icon?: React.ReactNode;
   onPress?: () => void;
   isLoading?: boolean;
@@ -43,14 +43,16 @@ const Button: React.FC<ButtonProps> = ({
         />
       )}
 
-      <View testID="button-icon">{icon}</View>
+      {icon && <View testID="button-icon">{icon}</View>}
 
-      <Text
-        style={[styles.buttonText, inverted && styles.invertedText]}
-        testID="button-text"
-      >
-        {isLoading ? "Loading..." : title}
-      </Text>
+      {title && (
+        <Text
+          style={[styles.buttonText, inverted && styles.invertedText]}
+          testID="button-text"
+        >
+          {isLoading ? "Loading..." : title}
+        </Text>
+      )}
     </Pressable>
   );
 };
