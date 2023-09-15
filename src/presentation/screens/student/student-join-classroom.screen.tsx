@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { ToastAndroid, View } from "react-native";
 
 import { useClassroomUseCases } from "@/presentation/context/classroom.context";
 
+import Heading from "@/presentation/components/heading.component";
+import StyledText from "@/presentation/components/text.component";
 import Button from "@/presentation/components/button.component";
 import Input from "@/presentation/components/input.component";
 
@@ -15,23 +17,36 @@ const StudentJoinClassroomScreen = () => {
     try {
       const joinClassroomResult = await joinClassroom.execute(code);
 
-      alert(joinClassroomResult.message);
+      showToast(joinClassroomResult.message ?? "Request sent Successfully");
+      console.log({ joinClassroomResult });
     } catch (error) {
-      alert(error);
+      console.log({ error });
+      showToast("An error occured");
     }
   };
 
   const [code, setCode] = useState("");
 
+  const showToast = (message: string) => {
+    ToastAndroid.show(message, ToastAndroid.LONG);
+  };
+
   return (
     <View style={globalStyles.container}>
+      <Heading bold>Join Classroom</Heading>
+      <StyledText paragraph>Enter the classroom code</StyledText>
+
       <Input
         label="Code"
-        placeholder="Code"
+        placeholder="Enter the 6-digit code"
         value={code}
         onChangeText={setCode}
       />
-      <Button title="Join Classroom" onPress={handleJoinClassroom} />
+      <Button
+        title="Join"
+        onPress={handleJoinClassroom}
+        style={{ marginTop: 30 }}
+      />
     </View>
   );
 };
