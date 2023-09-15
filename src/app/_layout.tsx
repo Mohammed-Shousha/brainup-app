@@ -9,6 +9,7 @@ import { UserProvider } from "@/presentation/context/user.context";
 import { ClassroomProvider } from "@/presentation/context/classroom.context";
 import { QuizProvider } from "@/presentation/context/quiz.context";
 import { LessonProvider } from "@/presentation/context/lesson.context";
+import { AiProvider } from "@/presentation/context/ai.context";
 
 import colors from "@/presentation/styles/colors.styles";
 
@@ -33,20 +34,22 @@ const HomeLayout = () => {
 
   return (
     <UserProvider>
-      <ClassroomProvider>
-        <QuizProvider>
-          <LessonProvider>
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                contentStyle: {
-                  backgroundColor: colors.white,
-                },
-              }}
-            />
-          </LessonProvider>
-        </QuizProvider>
-      </ClassroomProvider>
+      <AiProvider>
+        <ClassroomProvider>
+          <QuizProvider>
+            <LessonProvider>
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: {
+                    backgroundColor: colors.white,
+                  },
+                }}
+              />
+            </LessonProvider>
+          </QuizProvider>
+        </ClassroomProvider>
+      </AiProvider>
     </UserProvider>
   );
 };
