@@ -12,7 +12,8 @@ interface QuizConfig {
 }
 
 export default interface Quiz {
-  id?: string;
+  id: string;
+  name: string;
   classroomId?: string;
   classroomName?: string;
   config?: QuizConfig;

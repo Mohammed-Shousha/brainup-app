@@ -1,7 +1,11 @@
+interface LessonContent {
+  type: "pdf" | "video";
+  content: string;
+}
+
 export default interface Lesson {
   id: string;
-  title: string;
-  description: string;
-  content: string;
-  classroomId: string;
+  name: string;
+  pdf?: LessonContent;
+  video?: LessonContent;
 }
