@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FFEECF"
+      "backgroundColor": "#FFFFFF"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -18,8 +18,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFEECF"
-      }
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.mshousha.brainup"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,6 +29,14 @@
     "scheme": "brain-up",
     "experiments": {
       "tsconfigPaths": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "561e863c-48b9-4197-b466-84b24a560fda"
+      }
     }
   }
 }
