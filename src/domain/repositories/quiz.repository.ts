@@ -4,4 +4,5 @@ import Quiz from "@/domain/entities/quiz.entity";
 export default interface IQuizRepository {
   create(quiz: Quiz): Promise<ApiResponse>;
   getTeacherQuizzes(): Promise<Quiz[]>;
+  getStudentQuiz(id: string): Promise<Quiz>;
 }
