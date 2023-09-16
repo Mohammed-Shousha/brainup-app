@@ -10,6 +10,7 @@ import { useQuizUseCases } from "@/presentation/context/quiz.context";
 import Heading from "@/presentation/components/heading.component";
 import Button from "@/presentation/components/button.component";
 import StyledText from "@/presentation/components/text.component";
+import ModalComponent from "@/presentation/components/modal.component";
 
 import BackArrowIcon from "@/presentation/components/icons/back-arrow.icon";
 import ForwardArrowIcon from "@/presentation/components/icons/forward-arrow.icon";
@@ -32,6 +33,8 @@ const StudentQuizScreen = () => {
   const [answersResult, setAnswersResult] = useState<boolean[]>([]); // [true, false, true]
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(5 * 60);
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleOptionPress = (option: number, questionNumber: number) => {
     if (isQuizFinished) return;
@@ -75,6 +78,7 @@ const StudentQuizScreen = () => {
 
     setAnswersResult(answersResult);
     setScore(score);
+    setModalVisible(true);
     setCurrentQuestion(0);
     setTimeLeft(0);
     setIsQuizFinished(true);
@@ -137,6 +141,12 @@ const StudentQuizScreen = () => {
 
   return (
     <View style={globalStyles.container}>
+      <ModalComponent
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        title="Great Job"
+        message={`You have scored ${score} out of ${quizQuestions?.length}`}
+      />
       <Heading>{`${quiz?.name}`}</Heading>
       <View style={styles.header}>
         <View>
