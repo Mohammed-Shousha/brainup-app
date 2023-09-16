@@ -1,6 +1,6 @@
 import { StyleSheet, Pressable } from "react-native";
 
-import StyledText from "./text.component";
+import StyledText from "@/presentation/components/text.component";
 
 import colors from "@/presentation/styles/colors.styles";
 
@@ -19,6 +19,7 @@ const SelectorButton: React.FC<SelectorButtonProps> = ({
     <Pressable
       style={[styles.button, active && styles.active]}
       onPress={onPress}
+      testID="selector-button"
     >
       <StyledText style={{ fontSize: 24, marginBottom: 0 }}>{title}</StyledText>
     </Pressable>

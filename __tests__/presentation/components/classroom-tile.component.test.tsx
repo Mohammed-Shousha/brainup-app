@@ -27,26 +27,26 @@ describe("Tile component", () => {
     const { getByTestId } = render(
       <ClassroomTile title="Math" screenRoute="math" showAddIcon />
     );
-    expect(getByTestId("tile").props.style[1].backgroundColor).toEqual(
-      colors.secondary
-    );
+    expect(getByTestId("tile").props.style).toContainEqual({
+      backgroundColor: colors.secondary,
+    });
   });
 
   it("should have default background when showAddIcon is false", () => {
     const { getByTestId } = render(
       <ClassroomTile title="Math" screenRoute="math" />
     );
-    expect(getByTestId("tile").props.style[1].backgroundColor).toEqual(
-      colors.lightSecondary
-    );
+    expect(getByTestId("tile").props.style).toContainEqual({
+      backgroundColor: colors.lightSecondary,
+    });
   });
 
   it("should have a different background color based on the index ", () => {
     const { getByTestId } = render(
       <ClassroomTile title="Math" screenRoute="math" index={2} />
     );
-    expect(getByTestId("tile").props.style[1].backgroundColor).toEqual(
-      colors.lightPrimary
-    );
+    expect(getByTestId("tile").props.style).toContainEqual({
+      backgroundColor: colors.lightPrimary,
+    });
   });
 });

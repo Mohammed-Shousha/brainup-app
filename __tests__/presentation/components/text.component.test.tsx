@@ -15,16 +15,16 @@ describe("StyledText", () => {
 
   it("applies bold style when bold prop is true", () => {
     const { getByTestId } = render(<StyledText bold>Hello World</StyledText>);
-    expect(getByTestId("text").props.style[1].fontFamily).toBe(
-      fonts.nunitoBold
-    );
+    expect(getByTestId("text").props.style).toContainEqual({
+      fontFamily: fonts.nunitoBold,
+    });
   });
 
   it("applies paragraph style when paragraph prop is true", () => {
     const { getByTestId } = render(
       <StyledText paragraph>Hello World</StyledText>
     );
-    expect(getByTestId("text").props.style[2]).toEqual({
+    expect(getByTestId("text").props.style).toContainEqual({
       fontFamily: fonts.inter,
       fontSize: 16,
     });
@@ -32,7 +32,7 @@ describe("StyledText", () => {
 
   it("applies center style when center prop is true", () => {
     const { getByTestId } = render(<StyledText center>Hello World</StyledText>);
-    expect(getByTestId("text").props.style[3]).toEqual({
+    expect(getByTestId("text").props.style).toContainEqual({
       textAlign: "center",
     });
   });
@@ -41,14 +41,16 @@ describe("StyledText", () => {
     const { getByTestId } = render(
       <StyledText color="primary">Hello World</StyledText>
     );
-    expect(getByTestId("text").props.style[4].color).toBe(colors.primary);
+    expect(getByTestId("text").props.style).toContainEqual({
+      color: colors.primary,
+    });
   });
 
   it("applies custom style when style prop is provided", () => {
     const { getByTestId } = render(
       <StyledText style={{ fontSize: 24 }}>Hello World</StyledText>
     );
-    expect(getByTestId("text").props.style[5]).toEqual({
+    expect(getByTestId("text").props.style).toContainEqual({
       fontSize: 24,
     });
   });

@@ -51,13 +51,13 @@ describe("Button", () => {
   it("should apply inverted style when inverted prop is true", () => {
     const { getByTestId } = render(<Button title="Press me" inverted />);
 
-    expect(getByTestId("button").props.style[1]).toEqual({
+    expect(getByTestId("button").props.style).toContainEqual({
       backgroundColor: colors.white,
       borderWidth: 2,
       borderColor: colors.primary,
     });
 
-    expect(getByTestId("button-text").props.style[1]).toEqual({
+    expect(getByTestId("button-text").props.style).toContainEqual({
       color: colors.primary,
     });
   });

@@ -14,15 +14,17 @@ describe("Heading component", () => {
 
   it("should render bold text when bold prop is true", () => {
     const { getByTestId } = render(<Heading bold>Test Heading</Heading>);
-    expect(getByTestId("heading-text").props.style[1].fontFamily).toBe(
-      fonts.nunitoBold
-    );
+    expect(getByTestId("heading-text").props.style).toContainEqual({
+      fontFamily: fonts.nunitoBold,
+    });
   });
 
   it("should apply custom styles", () => {
     const { getByTestId } = render(
       <Heading style={{ color: "red" }}>Test Heading</Heading>
     );
-    expect(getByTestId("heading-text").props.style[2].color).toBe("red");
+    expect(getByTestId("heading-text").props.style).toContainEqual({
+      color: "red",
+    });
   });
 });

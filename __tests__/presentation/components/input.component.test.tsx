@@ -75,4 +75,20 @@ describe("Input component", () => {
 
     expect(getByTestId("input").props.keyboardType).toEqual("email-address");
   });
+
+  it("should render the input with the style passed", () => {
+    const { getByTestId } = render(
+      <Input
+        label="Username"
+        placeholder="Enter your username"
+        onChangeText={onChangeText}
+        value=""
+        style={{ backgroundColor: "red" }}
+      />
+    );
+
+    expect(getByTestId("input").props.style).toContainEqual({
+      backgroundColor: "red",
+    });
+  });
 });
