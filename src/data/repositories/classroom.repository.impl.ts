@@ -143,4 +143,8 @@ export default class ClassroomRepository implements IClassroomRepository {
 
     return classrooms;
   }
+
+  async getStudentClassroom(id: string): Promise<Classroom> {
+    throw new Error("Method not implemented.");
+  }
 }

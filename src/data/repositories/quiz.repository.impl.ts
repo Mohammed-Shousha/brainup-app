@@ -1,13 +1,12 @@
 import Quiz from "@/domain/entities/quiz.entity";
 import IQuizRepository from "@/domain/repositories/quiz.repository";
 
-import { quizMapper } from "@/data/mappers/quiz.mapper";
-
 import { sendAuthRequest } from "@/core/utils/helpers";
 
 import {
   TEACHER_CREATE_QUIZ_URL,
   TEACHER_GET_QUIZZES_URL,
+  STUDENT_GET_QUIZ_URL,
 } from "@/core/utils/constants";
 import ApiResponse from "@/core/types/api-response.type";
 
@@ -32,5 +31,9 @@ export default class QuizRepository implements IQuizRepository {
     const quizzes: Quiz[] = getTeacherQuizzesResponse.data;
 
     return quizzes;
+  }
+
+  async getStudentQuiz(id: string): Promise<Quiz> {
+    throw new Error("Method not implemented.");
   }
 }
