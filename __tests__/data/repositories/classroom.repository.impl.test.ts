@@ -54,6 +54,21 @@ describe("ClassroomRepository", () => {
 
       expect(createdClassroom).toEqual(expectedResponse.classroom);
     });
+
+    it("should throw an error if classroom creation fails", async () => {
+      const classroomName = "Test Classroom";
+
+      const expectedResponse: ApiResponse = {
+        status: "failed",
+        message: "Classroom creation failed",
+      };
+
+      (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
+
+      await expect(
+        classroomRepository.create(classroomName)
+      ).rejects.toThrowError(expectedResponse.message);
+    });
   });
 
   describe("getTeacherClassroom", () => {
@@ -82,6 +97,21 @@ describe("ClassroomRepository", () => {
 
       expect(classroom.id).toEqual(classroomId);
     });
+
+    it("should throw an error if classroom retrieval fails", async () => {
+      const classroomId = "123";
+
+      const expectedResponse: ApiResponse = {
+        status: "failed",
+        message: "Classroom retrieval failed",
+      };
+
+      (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
+
+      await expect(
+        classroomRepository.getTeacherClassroom(classroomId)
+      ).rejects.toThrowError(expectedResponse.message);
+    });
   });
 
   describe("getTeacherClassrooms", () => {
@@ -109,6 +139,19 @@ describe("ClassroomRepository", () => {
       expect(classrooms).toBeInstanceOf(Array);
       expect(classrooms).toHaveLength(1);
     });
+
+    it("should throw an error if classroom retrieval fails", async () => {
+      const expectedResponse: ApiResponse = {
+        status: "failed",
+        message: "Classroom retrieval failed",
+      };
+
+      (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
+
+      await expect(
+        classroomRepository.getTeacherClassrooms()
+      ).rejects.toThrowError(expectedResponse.message);
+    });
   });
 
   describe("approveStudent", () => {
@@ -133,6 +176,21 @@ describe("ClassroomRepository", () => {
       );
 
       expect(response).toEqual(expectedResponse);
+    });
+
+    it("should throw an error if student request approval fails", async () => {
+      const requestId = "123";
+
+      const expectedResponse: ApiResponse = {
+        status: "failed",
+        message: "Student request approval failed",
+      };
+
+      (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
+
+      await expect(
+        classroomRepository.approveStudent(requestId)
+      ).rejects.toThrowError(expectedResponse.message);
     });
   });
 
@@ -159,6 +217,21 @@ describe("ClassroomRepository", () => {
 
       expect(response).toEqual(expectedResponse);
     });
+
+    it("should throw an error if student request rejection fails", async () => {
+      const requestId = "123";
+
+      const expectedResponse: ApiResponse = {
+        status: "failed",
+        message: "Student request rejection failed",
+      };
+
+      (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
+
+      await expect(
+        classroomRepository.rejectStudent(requestId)
+      ).rejects.toThrowError(expectedResponse.message);
+    });
   });
 
   describe("join", () => {
@@ -183,6 +256,21 @@ describe("ClassroomRepository", () => {
       );
 
       expect(response).toEqual(expectedResponse);
+    });
+
+    it("should throw an error if classroom joining fails", async () => {
+      const code = "123456";
+
+      const expectedResponse: ApiResponse = {
+        status: "failed",
+        message: "Classroom joining failed",
+      };
+
+      (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
+
+      await expect(classroomRepository.join(code)).rejects.toThrowError(
+        expectedResponse.message
+      );
     });
   });
 
@@ -210,6 +298,19 @@ describe("ClassroomRepository", () => {
 
       expect(classrooms).toBeInstanceOf(Array);
       expect(classrooms).toHaveLength(1);
+    });
+
+    it("should throw an error if classroom retrieval fails", async () => {
+      const expectedResponse: ApiResponse = {
+        status: "failed",
+        message: "Classroom retrieval failed",
+      };
+
+      (sendAuthRequest as jest.Mock).mockResolvedValueOnce(expectedResponse);
+
+      await expect(
+        classroomRepository.getStudentClassrooms()
+      ).rejects.toThrowError(expectedResponse.message);
     });
   });
 });

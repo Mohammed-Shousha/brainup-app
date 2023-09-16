@@ -30,6 +30,7 @@ describe("IClassroomRepository", () => {
       rejectStudent: jest.fn().mockResolvedValue(apiResponseMock),
       join: jest.fn().mockResolvedValue(apiResponseMock),
       getStudentClassrooms: jest.fn().mockResolvedValue(classroomsMock),
+      getStudentClassroom: jest.fn().mockResolvedValue(classroomMock),
     };
   });
 
@@ -106,6 +107,16 @@ describe("IClassroomRepository", () => {
       const result = await classroomRepository.getStudentClassrooms();
 
       expect(result).toEqual(classroomsMock);
+    });
+  });
+
+  describe("getStudentClassroom", () => {
+    it("should retrieve a classroom with the specified ID", async () => {
+      const classroomId = "1";
+
+      const result = await classroomRepository.getStudentClassroom(classroomId);
+
+      expect(result).toEqual(classroomMock);
     });
   });
 });
