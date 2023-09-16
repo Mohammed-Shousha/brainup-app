@@ -36,5 +36,22 @@ src/
 - [React Native](https://reactnative.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Context API](https://react.dev/reference/react/useContext)
-- [Expo Router](https://docs.expo.dev/routing/introduction/)
-- [Expo Font](https://docs.expo.dev/versions/latest/sdk/font/)
+- [Expo Router](https://github.com/expo/router)
+- [Expo AV](https://docs.expo.dev/versions/latest/sdk/av/)
+- [react-native-pdf](https://github.com/wonday/react-native-pdf)
+- [Jest](https://jestjs.io/)
+- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
+
+## How to run the app
+
+1. Clone the repo.
+2. Run `npm install` to install the dependencies.
+3. Run `npm start` to start the expo server.
+4. Install the [expo go](https://expo.dev/client) app on your phone.
+5. Scan the QR code from the expo server to run the app on your phone.
+
+## How to run the tests
+
+- Run `npm test` to run the tests.
+- Run `npm test:watch` to run the tests in watch mode.
+- Run `npm test:cov` to run the tests with coverage.

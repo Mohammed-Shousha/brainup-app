@@ -9,6 +9,7 @@
     "web": "expo start --web",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
     "ts:check": "tsc"
   },
   "dependencies": {
