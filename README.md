@@ -55,3 +55,8 @@ src/
 - Run `npm test` to run the tests.
 - Run `npm test:watch` to run the tests in watch mode.
 - Run `npm test:cov` to run the tests with coverage.
+
+## Video Demo
+
+https://github.com/Mohammed-Shousha/brainup-app/assets/65350067/9274e579-b1d9-42b0-9a8f-37c3031afeca
+
